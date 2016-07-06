@@ -62,10 +62,11 @@ var tileLevels = L.layerGroup([
 	mapLevel0vampire = L.tileLayer(urlMainRef + 'img/map_paris/lvl_0/suit/{z}/{x}/{y}.png', { noWrap: true, minZoom: 3, maxZoom: 5 }),
 	mapLevel1vampire = L.tileLayer(urlMainRef + 'img/map_paris/lvl_1/guest/{z}/{x}/{y}.png', { noWrap: true, minZoom: 3, maxZoom: 5 }),
 	mapLevel2vampire = L.tileLayer(urlMainRef + 'img/map_paris/lvl_2/closed/{z}/{x}/{y}.png', { noWrap: true, minZoom: 3, maxZoom: 5 }),
-	mapLevel3vampire = L.tileLayer(urlMainRef + 'img/map_paris/lvl_3/closed/{z}/{x}/{y}.png', { noWrap: true, minZoom: 3, maxZoom: 5 }),
+	mapLevel3vampire = L.tileLayer(urlMainRef + 'img/map_paris/lvl_3/closed/{z}/{x}/{y}.png', { noWrap: true, minZoom: 3, maxZoom: 5 })
 ]);
 
 mapLevel1base.addTo(lmap);
+
 lmap.zoomControl.setPosition('topright');
 lmap.setMaxBounds([[-40.71, -215.50],[86.34, 144.66]]);
 
@@ -74,18 +75,7 @@ $("#level-1").addClass("active");
 
 var mapName = "paris";
 
-
-// Base icon
-var baseIcon = L.Icon.extend({
-	options: {
-		iconSize:     [32, 32],
-		iconAnchor:   [16, 16],
-		popupAnchor:  [-2, -15]
-	}
-});
-var iconPointRed = new baseIcon({iconUrl: 'img/icons/point_red.png'});
-
-// limitations: add data follow old method for polyline, PointRed-Winch. polygon
+// limitations: add data follow old method for polyline, polygon
 var allMarkers = L.layerGroup([
 
     L.polyline([[70.58, -27.42], [68.64, -20.69], [67.84, -10.89]], {color: '#fff', weight: 2, opacity: 0.25, smoothFactor: 1, className: "level1sab-chandelier"}),
@@ -96,6 +86,6 @@ var allMarkers = L.layerGroup([
 
     L.polygon([[65.9, -8.5], [66.25, -12.5], [64.5, -12.5]], {color: '#00F204', opacity: 0, weight: 2, fillColor: '#00AA05', fillOpacity: 0.5, className: "level2camera"}).bindLabel("Security Camera"),
     L.polygon([[59.7, -8.5], [61.3, -12.5], [59.25, -12.5]], {color: '#00F204', opacity: 0, weight: 2, fillColor: '#00AA05', fillOpacity: 0.5, className: "level2camera"}).bindLabel("Security Camera"),
-    L.polygon([[66.31, -31.86], [64.75, -29.79], [64.75, -33.83]], {color: '#00F204', opacity: 0, weight: 2, fillColor: '#00AA05', fillOpacity: 0.5, className: "level2camera"}).bindLabel("Security Camera"),
+    L.polygon([[66.31, -31.86], [64.75, -29.79], [64.75, -33.83]], {color: '#00F204', opacity: 0, weight: 2, fillColor: '#00AA05', fillOpacity: 0.5, className: "level2camera"}).bindLabel("Security Camera")
 
 ]);

@@ -12,25 +12,25 @@
     "icon": "sabotage"
   },
   {
-    "id": 1,
+    "id": 2,
     "item": "sab-heater",
     "name": "Gas Heater Lamp",
     "icon": "sabotage"
   },
   {
-    "id": 1,
+    "id": 3,
     "item": "sab-canister",
     "name": "Gas Canister",
     "icon": "sabotage"
   },
   {
-    "id": 1,
+    "id": 4,
     "item": "sab-drum",
     "name": "Gasoline Drum",
     "icon": "sabotage"
   },
   {
-    "id": 1,
+    "id": 5,
     "item": "sab-winch",
     "name": "Light Rig Winch",
     "icon": "sabotage"

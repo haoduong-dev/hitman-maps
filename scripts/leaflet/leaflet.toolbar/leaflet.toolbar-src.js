@@ -22,12 +22,12 @@ L.Toolbar = (L.Layer || L.Class).extend({
 
 	addTo: function(map) {
 		this._arguments = [].slice.call(arguments);
-
+		
 		map.addLayer(this);
-
+		
 		return this;
 	},
-
+	
 	onAdd: function(map) {
 		var currentToolbar = map._toolbars[this._toolbar_type];
 

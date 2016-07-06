@@ -1,0 +1,16 @@
+[{
+	"level": 0,
+	"item": "enter",
+	"x": -42.4,
+	"y": 57.68,
+	"label": "Starting Location: Undercover in Kitchen",
+	"popup": "<img src='img/map_paris/screenshots/lvl0_enter1.jpg'><h2>Starting Location</h2><h1>Undercover in Kitchen</h1>"
+},
+{
+	"level": 0,
+	"item": "enter",
+	"x": -9.4,
+	"y": 65.29,
+	"label": "Starting Location: Undercover in Locker Room",
+	"popup": "<img src='img/map_paris/screenshots/lvl0_enter2.jpg'><h2>Starting Location</h2><h1>Undercover in Locker Room</h1>"
+}]

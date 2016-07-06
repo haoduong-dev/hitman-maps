@@ -293,13 +293,24 @@ lmap.on('draw:created', function(evt) {
 		layer = evt.layer;
 
 	drawnItems.addLayer(layer);
+	// layer.isEdit = false;
+	// var editPopup;
 
-// 	layer.on('click', function(event) {
-// 		new L.EditToolbar.Popup(event.latlng, {
-// 			className: 'leaflet-draw-toolbar',
-// 			actions: editActions
-// 		}).addTo(lmap, layer);
-// 	});
+	// layer.on('click', function(event) {
+	// 	if (layer.isEdit) {
+	// 		if (editPopup) {
+	// 			lmap.removeLayer(editPopup);
+	// 		}
+	// 	} else {
+	// 		editPopup = new L.EditToolbar.Popup(event.latlng, {
+	// 			className: 'leaflet-draw-toolbar',
+	// 			actions: editActions
+	// 		});
+	// 		editPopup.addTo(lmap, layer);
+	// 	}
+    //
+	// 	layer.isEdit = !layer.isEdit;
+	// });
 });
 
 // Parse CSV data

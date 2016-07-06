@@ -12,18 +12,26 @@
 
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-	<link rel="stylesheet" href="scripts/chosen/chosen.min.css">
-	<link type="text/css" rel="stylesheet" href="styles/maps.css">
-	<link type="text/css" rel="stylesheet" href="styles/maps_paris.css">
-	<link rel="stylesheet" href="leaflet/leaflet.css">
-	<link rel="stylesheet" href="leaflet/leaflet.label.css">
-
-	<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
-	<script src="scripts/chosen/chosen.jquery.min.js"></script>
-	<script src="scripts/jquery.nicescroll.min.js"></script>
-	<script src="leaflet/leaflet.js"></script>
-	<script src="leaflet/leaflet.label.js"></script>
+	<link type="text/css" rel="stylesheet" href="scripts/chosen/chosen.min.css">
+	<link type="text/css" rel="stylesheet" href="scripts/leaflet/leaflet/leaflet.css">
+	<link type="text/css" rel="stylesheet" href="scripts/leaflet/leaflet.label/leaflet.label.css">
+	<link type="text/css" rel="stylesheet" href="scripts/leaflet/leaflet.draw/leaflet.draw.css">
+	<link type="text/css" rel="stylesheet" href="scripts/leaflet/leaflet.toolbar/leaflet.toolbar.css">
 	
+	<link type="text/css" rel="stylesheet" href="styles/maps.css">
+	<link type="text/css" rel="stylesheet" href="styles/map_paris.css">
+
+<!-- 	<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script> -->
+	<script src="scripts/jquery/jquery-3.0.0.min.js"></script>
+	<script src="scripts/chosen/chosen.jquery.min.js"></script>
+	<script src="scripts/nicescroll/jquery.nicescroll.min.js"></script>
+	<script src="scripts/papaparse/papaparse.min.js"></script>
+
+	<script src="scripts/leaflet/leaflet/leaflet.js"></script>
+	<script src="scripts/leaflet/leaflet.label/leaflet.label.js"></script>
+	<script src="scripts/leaflet/leaflet.toolbar/leaflet.toolbar-src.js"></script>
+	<script src="scripts/leaflet/leaflet.draw/leaflet.draw-src.js"></script>
+
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -49,7 +57,9 @@
 	
 	<div id="sidebar">
 
-		<a id="site-logo" href="default.htm"><img title="Hitman Interactive Maps" src="img/main_logo.png"></a>
+		<a id="site-logo" href="index.html"><img title="Hitman Interactive Maps" src="img/main_logo.png"></a>
+
+		<a id="save-local" target="_blank">Save local</a>
 
 		<div class="marker-list">
 
@@ -241,11 +251,11 @@
 		
 	</div>
 
-	<div id="mapparis" class="leaflet-map"></div>
+	<div id="lmap" class="leaflet-map"></div>
 
-	<script src="scripts/map_common.js"></script>
+	<script src="scripts/maps_pre.js"></script>
 	<script src="scripts/map_paris.js"></script>
-	<script src="scripts/main.js"></script>
+	<script src="scripts/maps_post.js"></script>
 	
 </body>
 </html>

@@ -2,26 +2,32 @@
 // Count all markers
 function cont_markers() {
     $(".marker-count").each(function() {
-        var a = $(this).parent().attr("id").substr(6, 7),
-            b = 0;
+        var tarLevel = parseInt($(this).parent().attr("id").substr(6, 7), 10);
+        var counter = 0;
         $(".marker-category li").not(".hide").each(function() {
-            for (var c = $(this).attr("id").substr(2), d = 0; d < allMarkersArr.length; d++)
-				allMarkersArr[d].indexOf("level" + a + c) > -1 && b++
-        }), 
-		0 == b ? $(this).hide() : $(this).text(b).show()
-    })
+            var tarItem = $(this).attr("id").substr(2);
+            counter = counter + dbMarker({level:tarLevel, item:tarItem}).count();
+        });
+		if (0 == counter) {
+            $(this).hide();
+        } else {
+            $(this).text(counter).show();
+        }
+    });
 }
 
-// Main processing: wait until parsing all CSV data
+// Main processing: wait until finished loading data from remote server
 function processMap() {
-	if (isCsvLoaded) {
-		
-		var allMarkers = L.layerGroup(
-			arrMarkers
-		);
+	if (isDataLoaded) {
+        // Current map
+        window.openedMap = $(".leaflet-map").attr("id");
 
-		// Current map
-		window.openedMap = $(".leaflet-map").attr("id");
+        dbMarker.store("hitmanmaps_marker_paris");
+        dbMarker().each(function(record) {
+            allMarkers.addLayer(new L.MarkerEx(record.___id, record.level, record.item, record.x, record.y, record.title, record.description));
+        });
+        window[openedMap].addLayer(allMarkers);
+
 
 		// Current level of map
 		window.openedMapID = $(".change-level.active").attr("id").substr(6, 7);
@@ -36,14 +42,15 @@ function processMap() {
 		// Load icons for all category items
 		$(".marker-category li").each(function() {
 			var a = $(this).attr("id").substr(2);
-			$(this).css("background", "url('img/icons/" + a + ".png') no-repeat left")
+            if (!a.startsWith("sab-") && !a.startsWith("dis-")) {
+                $(this).css("background", "url('img/icons/" + a + ".png') no-repeat left");
+            }
 		});
 
-		window[openedMap].addLayer(allMarkers);
 
-		window.allMarkersArr = $(".leaflet-marker-icon").map(function() {
-			return $(this).prop("alt").split(" ")[0]
-		}).get(), 
+		// window.allMarkersArr = $(".leaflet-marker-icon").map(function() {
+		// 	return $(this).prop("alt").split(" ")[0]
+		// }).get(),
 
 		// SearchBar dropdown: select
 		$("#searchbar").chosen({
@@ -96,7 +103,26 @@ function processMap() {
 		// --- Init GUI SideBar --- end
 
 		// Count all markers
-		cont_markers(), 
+		cont_markers(),
+
+		// EDIT button (go to EDIT mode)
+		$("#mode-edit").click(function() {
+			if (!isEditing) {
+				if (isEditMode) {
+					// Switch to normal mode
+					$(this).removeClass("active");
+
+                    $(".edit").hide();
+				} else {
+					// Switch to EDIT mode
+					$(this).addClass("active");
+
+                    $(".edit").show();
+				}
+
+				isEditMode = !isEditMode;
+			}
+		}),
 
 		// Level x button
 		$(".change-level").click(function() {
@@ -278,14 +304,14 @@ var editActions = [
 
 new L.DrawToolbar.Control({ 
 	position: 'topright',
-	className: 'leaflet-draw-toolbar',
+	className: 'leaflet-draw-toolbar edit',
 	actions: [
 // 		L.Draw.Polygon,
 // 		L.Draw.Polyline,
 		L.Draw.MarkerEx,
 // 		L.Draw.Rectangle,
 // 		L.Draw.Circle
-	],
+	]
 }).addTo(lmap);
 
 lmap.on('draw:created', function(evt) {
@@ -314,10 +340,21 @@ lmap.on('draw:created', function(evt) {
 });
 
 // Parse CSV data
-Papa.parse(dataUrl, {
-	download: true,
-	header: true,
-	complete: processCsvData
-});
+// Papa.parse(dataUrl, {
+// 	download: true,
+// 	header: true,
+// 	complete: processCsvData
+// });
+
+var isDataLoaded = false;
+
+// Load data from remote server
+$.get(dataUrl, function(data) {
+    var db = TAFFY(data);
+    localStorage.clear();
+    db.store("hitmanmaps_marker_paris");
+
+    isDataLoaded = true;
+}, 'text');
 
 processMap();

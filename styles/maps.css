@@ -137,6 +137,70 @@ a {
     color: #fff;
     text-decoration: none
 }
+#mode-change {
+    z-index: 1;
+    position: fixed;
+    width: 40px;
+    top: 110px;
+    right: 3px;
+    border-radius: 3px;
+    border: 2px solid #fff
+}
+#mode-change #mode-edit {
+    -moz-user-select: none;
+    position: relative;
+    float: left;
+    width: 30px;
+    height: 12px;
+    padding: 15px 5px;
+    margin: 0;
+    background: rgba(22, 24, 29, 0.75);
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background ease .15s
+}
+#mode-change #mode-edit:hover {
+    background: rgba(255, 255, 255, 0.65);
+    color: #000
+}
+#mode-change #mode-edit.active {
+    background: #fff;
+    color: #000
+}
+#mode-change #mode-edit.active:hover {
+    color: rgba(0, 0, 0, 0.5)
+}
+.leaflet-control-toolbar {
+    position: relative;
+    float: left;
+    right: 10px;
+}
+#edit-download {
+    -moz-user-select: none;
+    z-index: 1;
+    position: fixed;
+    width: 40px;
+    /*height: 12px;*/
+    top: 420px;
+    right: 3px;
+    border-radius: 3px;
+    border: 2px solid #fff;
+    padding: 7px 0;
+    margin: 0;
+    background: rgba(22, 24, 29, 0.75);
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+#edit-download:hover {
+    background: rgba(255, 255, 255, 0.65);
+    color: #000
+}
 #level-change {
     z-index: 1;
     position: fixed;
@@ -517,7 +581,7 @@ a {
 .marker-category li {
     position: relative;
     -moz-user-select: none;
-    display: block;
+    /*display: block;*/
     float: left;
     width: 115px;
     height: 12px;
@@ -526,7 +590,7 @@ a {
     color: #9c9fa4;
     font-weight: 600;
     font-size: 14px;
-    background: url(../img/icons/blank.png) no-repeat left;
+    /*background: url(../img/icons/blank.png) no-repeat left;*/
     cursor: pointer;
     transition: all ease .15s
 }
@@ -904,4 +968,7 @@ li.marker-sub {
         border-radius: 3px;
         border: 2px solid #fff
     }
+}
+.edit {
+    display: none;
 }

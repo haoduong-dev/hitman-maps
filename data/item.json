@@ -1,0 +1,380 @@
+[
+  {
+    "id": 1,
+    "item": "blank",
+    "name": "note",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "sab-chandelier",
+    "name": "Chandelier",
+    "icon": "sabotage"
+  },
+  {
+    "id": 1,
+    "item": "sab-heater",
+    "name": "Gas Heater Lamp",
+    "icon": "sabotage"
+  },
+  {
+    "id": 1,
+    "item": "sab-canister",
+    "name": "Gas Canister",
+    "icon": "sabotage"
+  },
+  {
+    "id": 1,
+    "item": "sab-drum",
+    "name": "Gasoline Drum",
+    "icon": "sabotage"
+  },
+  {
+    "id": 1,
+    "item": "sab-winch",
+    "name": "Light Rig Winch",
+    "icon": "sabotage"
+  },
+  {
+    "id": 1,
+    "item": "sab-mounting",
+    "name": "Loudspeaker",
+    "icon": "sabotage"
+  },
+  {
+    "id": 1,
+    "item": "sab-leak",
+    "name": "Stove",
+    "icon": "sabotage"
+  },
+  {
+    "id": 1,
+    "item": "sab-wire",
+    "name": "Wire Plug",
+    "icon": "sabotage"
+  },
+  {
+    "id": 1,
+    "item": "dis-display",
+    "name": "Display Case",
+    "icon": "distraction"
+  },
+  {
+    "id": 1,
+    "item": "dis-faucet",
+    "name": "Faucet",
+    "icon": "distraction"
+  },
+  {
+    "id": 1,
+    "item": "dis-lights",
+    "name": "Flood Lights",
+    "icon": "distraction"
+  },
+  {
+    "id": 1,
+    "item": "dis-fusebox",
+    "name": "Fusebox",
+    "icon": "distraction"
+  },
+  {
+    "id": 1,
+    "item": "dis-piano",
+    "name": "Piano",
+    "icon": "distraction"
+  },
+  {
+    "id": 1,
+    "item": "dis-radio",
+    "name": "Radio",
+    "icon": "distraction"
+  },
+  {
+    "id": 1,
+    "item": "dis-rack",
+    "name": "Rack Case",
+    "icon": "distraction"
+  },
+  {
+    "id": 1,
+    "item": "dis-sink",
+    "name": "Sink",
+    "icon": "distraction"
+  },
+  {
+    "id": 1,
+    "item": "dis-vacuum",
+    "name": "Vacuum Cleaner",
+    "icon": "distraction"
+  },
+  {
+    "id": 1,
+    "item": "poison",
+    "name": "Poison",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "alarm",
+    "name": "Alarm",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "disguise",
+    "name": "Disguise",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "blend",
+    "name": "Blend In",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "camera",
+    "name": "Camera",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "evidence",
+    "name": "Evidence",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "item",
+    "name": "Item",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "location",
+    "name": "Location",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "interaction",
+    "name": "Interaction",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "intel",
+    "name": "Intel",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "locked",
+    "name": "Locked",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "seccheck",
+    "name": "Security Check",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "container",
+    "name": "Hiding Spot",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "conceal",
+    "name": "Conceal Item",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "battleaxe",
+    "name": "Battle Axe",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "cleaver",
+    "name": "Cleaver",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "fireaxe",
+    "name": "Fire Axe",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "firepoker",
+    "name": "Fire Poker",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "hatchet",
+    "name": "Hatchet",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "knife",
+    "name": "Kitchen Knife",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "opener",
+    "name": "Letter Opener",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "saber",
+    "name": "Saber",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "scissors",
+    "name": "Scissors",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "screwdriver",
+    "name": "Screwdriver",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "bust",
+    "name": "Bust",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "brick",
+    "name": "Brick",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "crowbar",
+    "name": "Crowbar",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "extinguisher",
+    "name": "Fire Extinguisher",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "hammer",
+    "name": "Hammer",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "golfclub",
+    "name": "Golf Club",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "pipe",
+    "name": "Lead Pipe",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "baton",
+    "name": "Police Baton",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "wrench",
+    "name": "Wrench",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "weapoison",
+    "name": "Poison",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "firearm",
+    "name": "Firearm",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "explosive",
+    "name": "Explosive",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "ammo",
+    "name": "Ammo",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "coin",
+    "name": "Coin",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "enter",
+    "name": "Enter Point",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "exit",
+    "name": "Exit Point",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "stairsupdown",
+    "name": "Stairs Up/Down",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "waysupdown",
+    "name": "Ways Up/Down",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "waysin",
+    "name": "Passage",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "ledge",
+    "name": "Ledge",
+    "icon": ""
+  },
+  {
+    "id": 1,
+    "item": "icastash",
+    "name": "Agency Pickup",
+    "icon": ""
+  }
+]

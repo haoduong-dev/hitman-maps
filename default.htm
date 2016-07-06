@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<title>Hitman Interactive Maps</title>
+
+	<meta charset="utf-8">
+	<meta name="description" content="Hitman Interactive Maps">
+	<meta name="keywords" content="Hitman, hitman map, hitman interactive map">
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link type="text/css" rel="stylesheet" href="styles/main.css">
+
+	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+	
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-76169796-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+
+</head>
+
+<body id="main-page">
+
+	<header id="main-header">
+		<div id="main-title">Interactive maps for Hitman</div>
+		<img id="main-logo" src="img/main_logo.png">		
+		<div id="main-menu">
+			Follow map updates and leave feedback on <a href="https://www.reddit.com/r/HiTMAN/comments/4eaaid">Reddit</a> and <a href="http://www.hitmanforum.com/t/i-made-an-interactive-map-of-hitman-paris-level/6106">Hitmanforum</a>
+		</div>
+	</header>
+
+	<div id="main-missions">
+
+		<a href="paris.htm" id="mission-paris" class="mission-block">
+			<div class="mission-image"></div>
+			<h1>Paris</h1>
+			<h2>France</h2>
+			<img class="mission-flag" src="img/locations/flag_france.jpg">
+		</a>
+
+		<a href="sapienza/default.htm" id="mission-sapienza" class="mission-block">
+			<div class="mission-image"></div>
+			<h1>Sapienza</h1>
+			<h2>Italy</h2>
+			<img class="mission-flag" src="img/locations/flag_italy.jpg">
+		</a>
+
+		<a id="mission-marocco" class="mission-block inactive">
+			<div class="mission-image">
+				<span class="mission-placeholder">
+					Will be available in<br>
+					<span>May, 2016</span>
+				</span>
+			</div>
+			<h1>Marrakesh</h1>
+			<h2>Morocco</h2>
+			<img class="mission-flag" src="img/locations/flag_marocco.jpg">	
+		</a>
+
+	</div>
+
+	<div id="main-missions-small">
+
+		<a id="mission-thailand" class="mission-block-small">
+			<div class="mission-image">
+				<span class="mission-placeholder">
+					Will be available in<br>
+					<span>June, 2016</span>
+				</span>
+			</div>
+			<h1>Thailand</h1>
+			<img class="mission-flag" src="img/locations/flag_thailand.jpg">
+		</a>
+
+		<a id="mission-usa" class="mission-block-small">
+			<div class="mission-image">
+				<span class="mission-placeholder">
+					Will be available in<br>
+					<span>July, 2016</span>
+				</span>
+			</div>
+			<h1>U.S.A.</h1>
+			<img class="mission-flag" src="img/locations/flag_usa.jpg">			
+		</a>
+
+		<a id="mission-japan" class="mission-block-small">
+			<div class="mission-image">
+				<span class="mission-placeholder">
+					Will be available in<br>
+					<span>August, 2016</span>
+				</span>
+			</div>
+			<h1>Japan</h1>
+			<img class="mission-flag" src="img/locations/flag_japan.jpg">		
+		</a>
+
+		<a id="mission-unknown" class="mission-block-small">
+			<div class="mission-image">
+				<span class="mission-placeholder">
+					Will be available in<br>
+					<span>September, 2016</span>
+				</span>
+			</div>
+			<h1>Unknown</h1>
+			<img class="mission-flag" src="img/locations/flag_unknown.jpg">		
+		</a>
+
+	</div>
+
+	<div id="footer-links">
+
+		<a href="https://hitman.com/" id="link-site">Official Website</a>
+		<a href="https://www.reddit.com/r/HiTMAN/" id="link-reddit">Discuss on Reddit</a>
+		<a href="http://www.hitmanforum.com/" id="link-hf">Discuss on Forums</a>
+
+		<div id="footer-text">
+			Hitman&trade;, Hitman&trade; logo, images & text are the property of IO Interactive
+		</div>
+
+	</div>
+
+	<script type="text/javascript">
+		// Mainpage Overlay
+		$("#mission-training").click(function() {
+			$("#training-missions").fadeIn();
+		});
+
+		$("#training-missions").click(function() {
+			$(this).fadeOut();
+		});
+	</script>
+	
+</body>
+</html>

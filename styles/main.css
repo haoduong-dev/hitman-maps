@@ -1,0 +1,447 @@
+@import "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800|Open+Sans+Condensed:300,300italic,700&subset=latin,cyrillic";
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block
+}
+body {
+    line-height: 1
+}
+ol,
+ul {
+    list-style: none
+}
+blockquote,
+q {
+    quotes: none
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: none
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+html {
+    height: 100%
+}
+body {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    background: #222427;
+    font-family: open sans, Trbuchet MS, Verdana, Arial, sans-serif;
+    text-align: center
+}
+a {
+    color: #fff;
+    text-decoration: none
+}
+#page-404 {
+    background: url(../img/main_bg.jpg) no-repeat center #0d0e10;
+    background-size: cover
+}
+#page-404-content {
+    margin-top: 20%;
+    text-transform: uppercase
+}
+#page-404-content h1,
+#page-404-content h2 {
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: 2px
+}
+#page-404-content h1 {
+    font-size: 75px;
+    margin-bottom: 30px
+}
+#page-404-content h2 {
+    font-size: 20px;
+    margin: 40px 0 20px
+}
+#page-404-content span {
+    display: inline-block;
+    width: 55px;
+    height: 4px;
+    background: #be2f2f
+}
+#page-404-content a {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+    line-height: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    opacity: .5;
+    transition: all ease .25s
+}
+#page-404-content a:hover {
+    border-bottom: 1px solid rgba(255, 255, 255, 1);
+    opacity: 1
+}
+#main-page {
+    background: url(../img/main_bg.jpg) no-repeat center #0d0e10;
+    background-size: cover
+}
+#main-header {
+    margin: 45px auto 20px;
+    max-width: 650px;
+    text-align: center
+}
+#main-logo {
+    width: 100%;
+    max-width: 450px
+}
+#main-title {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px
+}
+#main-menu {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+    line-height: 20px;
+    opacity: .5;
+    transition: all ease .25s
+}
+#main-menu:hover {
+    opacity: .75
+}
+#main-menu a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    transition: all ease .25s
+}
+#main-menu a:hover {
+    border-bottom: 1px solid rgba(255, 255, 255, 1)
+}
+#main-missions,
+#main-missions-small {
+    text-align: center
+}
+.mission-block,
+.mission-block-small {
+    position: relative;
+    display: inline-block;
+    margin: 25px;
+    width: 300px;
+    height: 250px;
+    background: #fff;
+    border-radius: 5px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    box-shadow: 0 10px 25px #000;
+    text-align: left;
+    transition: all ease .25s;
+    cursor: pointer
+}
+.mission-block .mission-image {
+    height: 175px;
+    background-position: center -20px;
+    text-align: center;
+    transition: all ease .25s;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px
+}
+.mission-block h1 {
+    padding: 15px 0 3px 75px;
+    font-size: 25px;
+    font-weight: 800;
+    color: #2f3239;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all ease .25s
+}
+.mission-block h2 {
+    padding: 0 0 0 75px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #93969f;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all ease .25s
+}
+.mission-flag {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    border-radius: 3px;
+    box-shadow: 0 0 10px #B9BEC9
+}
+.mission-block:hover > .mission-image {
+    background-position: center -30px;
+    filter: brightness(125%)
+}
+.mission-block:hover > h2 {
+    color: #a01616
+}
+.overlay-missions {
+    display: none;
+    z-index: 9999;
+    margin: -35px 0 0;
+    padding: 125px 0 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(9, 9, 10, 0.95);
+    text-align: center
+}
+.overlay-title h1,
+.overlay-title h2 {
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase
+}
+.overlay-title h1 {
+    font-size: 40px;
+    font-weight: 800
+}
+.overlay-title h2 {
+    margin: 10px 0 50px;
+    font-size: 16px;
+    font-weight: 800;
+    opacity: .5
+}
+.overlay-missions .mission-block h1,
+.overlay-missions .mission-block h2 {
+    padding-left: 20px
+}
+.mission-block.inactive {
+    cursor: default
+}
+.mission-block.inactive .mission-placeholder {
+    display: inline-block;
+    padding-top: 70px;
+    font-weight: 800;
+    font-size: 14px;
+    color: #fff;
+    text-transform: uppercase
+}
+.mission-block.inactive .mission-placeholder span {
+    display: inline-block;
+    padding-top: 5px;
+    font-size: 25px
+}
+.mission-block.inactive:hover > .mission-image {
+    background-position: center -20px;
+    filter: none
+}
+.mission-block.inactive:hover > h2 {
+    color: #93969f
+}
+.mission-block.inactive:active {
+    margin: 30px
+}
+.mission-block-small {
+    width: 250px;
+    height: 200px;
+    cursor: default
+}
+.mission-block-small .mission-image {
+    height: 150px;
+    background: url(../img/locations/inactive.jpg) no-repeat center;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px
+}
+.mission-block-small h1 {
+    padding: 15px 0 3px 60px;
+    font-size: 20px;
+    font-weight: 800;
+    color: #2f3239;
+    text-transform: uppercase
+}
+.mission-block-small .mission-flag {
+    left: 15px;
+    bottom: 10px;
+    width: 30px;
+    height: 30px;
+    background-position: center;
+    border-radius: 3px;
+    box-shadow: 0 0 10px #bfbfbf
+}
+.mission-block-small .mission-placeholder {
+    display: inline-block;
+    padding-top: 60px;
+    font-weight: 800;
+    font-size: 14px;
+    color: #fff;
+    text-transform: uppercase
+}
+.mission-block-small .mission-placeholder span {
+    display: inline-block;
+    padding-top: 5px;
+    font-size: 25px
+}
+#mission-paris .mission-image {
+    background-image: url(../img/locations/paris.jpg)
+}
+#mission-sapienza .mission-image {
+    background-image: url(../img/locations/sapienza.jpg)
+}
+#mission-marocco .mission-image {
+    background-image: url(../img/locations/marrakesh.jpg)
+}
+#mission-training .mission-image {
+    background-image: url(../img/locations/ica.jpg)
+}
+#mission-training1 .mission-image {
+    background-image: url(../img/locations/training_1.jpg)
+}
+#mission-training2 .mission-image {
+    background-image: url(../img/locations/training_2.jpg)
+}
+#mission-sapienza.inactive .mission-image {
+    background-image: url(../img/locations/sapienza_.jpg)
+}
+#mission-marocco.inactive .mission-image {
+    background-image: url(../img/locations/marrakesh_.jpg)
+}
+#footer-links {
+    text-align: center;
+    overflow: hidden
+}
+#footer-links a {
+    -moz-user-select: none;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    padding: 15px 20px 15px 55px;
+    margin: 20px;
+    border-radius: 4px;
+    border: 2px solid #343638;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all ease .15s
+}
+#footer-links a:hover {
+    border: 2px solid #dcdfe3
+}
+#footer-text {
+    margin: 15px 0;
+    font-size: 10px;
+    font-weight: 600;
+    color: #6B6C72;
+    text-transform: uppercase
+}
+#link-steam {
+    background: url(../img/steam.png) no-repeat 15px 5px
+}
+#link-reddit {
+    background: url(../img/reddit.png) no-repeat 15px 6px
+}
+#link-hf {
+    background: url(../img/hf.png) no-repeat 15px 7px
+}
+#link-site {
+    background: url(../img/site.png) no-repeat 15px 7px
+}

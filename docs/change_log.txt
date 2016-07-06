@@ -1,0 +1,70 @@
+********************************************************************************
+Hitman Maps
+********************************************************************************
+
+--------------------------------------------------------------------------------
+CHANGE LOG
+--------------------------------------------------------------------------------
+
+*** WARNING (limitations) ***
++ When reload/refresh page (eg. press F5), page will reload DB from remote server.
+   Local DB will be removed (If you did not download DB, you will lost all updated data).
+   
+--------------------------------------------------------------------------------
+2016 June 26 (Hao)
+--------------------------------------------------------------------------------
+NEW FEATURES:
+
+[GUI] [Edit mode]
++ Choose other icon for specified item
++ Edit Red Point item (eg. Winch)
++ Move marker to change position by dragging when showing popup
+
+[DB]
++ Add master table as [item]
+    Add Table=taffy_hmm_item
+	  Fields=id, item, name, icon
+
+--------------------------------------------------------------------------------
+2016 June 23 (Hao)
+--------------------------------------------------------------------------------
+NEW FEATURES:
+
+[GUI]
++ Add "EDIT" toggle button: switch Edit mode ON/OFF
++ Add "Draw marker" button: add new marker on map
++ Add "Save DB" button: download database file after update
++ Add "note" item on side bar in "Points of interest":
+   add blank marker or note
+   this is default marker when adding new one
+ 
+[GUI] [Edit mode ON]
++ New mode for add/update/delete markers information
++ Show "Draw marker" button
++ Show "Save DB" button
++ Show "note" item on side bar in "Points of interest"
++ When click on marker on map,
+   show popup with controls
+   allow edit "item", "title", "description", or delete marker
+ 
+[GUI] [Edit mode OFF] (normal mode)
++ Same as previous version
++ View markers/paths information only, cannot edit
++ Hide "Draw marker" button
++ Hide "Save DB" button
++ Hide "note" item on side bar in "Points of interest"
+
+[Client processing]
++ Load markers information from remote server
+
+[Database (DB)]
++ Use local database to manage markers on map
+   Update database on remote server by download database file then replace it
+   (remember backup previous database file before replace)
+   database folder: data
+   database file: marker_paris.json
+  Use "Local Storage" as client DB
+    Table=taffy_hmm_marker_paris
+	  Fields=level, x, y, item, title, description
+
+--------------------------------------------------------------------------------

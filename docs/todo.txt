@@ -1,0 +1,79 @@
+********************************************************************************
+Hitman Maps
+********************************************************************************
+
+--------------------------------------------------------------------------------
+TODO
+--------------------------------------------------------------------------------
+<template>
++ TODO description -Creator >Assignee
+
+<template-done>
+OK TODO description (Assignee)
+--------------------------------------------------------------------------------
+
+HIGH
++ DB support multiple level categories
+  group lv 1: category. required. show on side bar.
+  group lv 2: sub category. if no this level, set empty. show on side bar (optional).
+  group lv 3: item. if no this level, set empty. show on side bar.
+  group lv 4: marker, same label/title. if no this level, set empty.
+  group lv 5: marker. required. show on map.
++ make parser tool to import all data from current website to new one -Hao >Hao
++ merge code and data of Hao and Winterbirds -Hao >Hao,Winterbirds
+
+NORMAL
++ show coordinates (x, y) on popup of marker in EDIT mode (use for creating Paths-limitation)
++ resolve limitation below -Hao
+   When reload/refresh page (eg. press F5), page will reload DB from remote server.
+   Local DB will be removed (If you did not download DB, you will lost all updated data).
+
+LOW
++ change design/layout for some parts in EDIT mode -Hao >Winterbirds
++ adjust css for mobile layout -Hao >Winterbirds
+
+--------------------------------------------------------------------------------
+WISH LIST
+--------------------------------------------------------------------------------
+GUI
++ group marker/path and marker/path (like camera) -Hao
++ link marker/path and marker/path -Hao
+
+DB
++ add/update/delete record in master tables such as "item" -Hao
++ download db in csv format -Hao
++ add own key/id for each marker, path (to avoid risk from taffydb) -Hao
++ (manual) run bat/script to merge local db (csv) to remote db (csv) -Hao
++ compare 2 db -Hao
++ add fields (category, subcategory, edit) to db table taffy_hmm_item -Hao
+    edit field to hide some items as Ledge. edit=false: hide from "select"
++ check db table constraint -Hao
+    Table=taffy_hmm_marker_paris
+	  Fields=id, level, x, y, item (not null), title, description [unique: level, x, y]
+    Table=taffy_hmm_item
+	  Fields=id, item (unique, not null), name (unique, not null), icon
++ Consider change field name in table "marker_<map>": "item" -> "group"
++ Use other DB lib for more features: PouchDB
+
+Client processing
++ allow to draw disguise layout map, if this feature done, no need to create many map layers, just layers for map levels -Hao
++ use one html page to load dynamic data for all maps -Hao
++ Cookies with the full current map state -Winterbirds
+  (position, level and zoom of the map, current disguise, shown marker groups, search box item)
+
+Back-end
++ Choose server-side scripting, maybe Node.js
++ Choose JavaScript framework, maybe Meteor
++ Real-time updated URL with the same full current map state
+  RISKS: security, spam, share too much data
+  
+--------------------------------------------------------------------------------
+LIMITATIONS
+--------------------------------------------------------------------------------
++ Not yet manage paths,
+   use previous method to create Paths (polyline, polygon)
++ When reload/refresh page (eg. press F5), page will reload DB from remote server.
+   Local DB will be removed (If you did not download DB, you will lost all updated data).
++ Search function on side bar not yet worked
+
+--------------------------------------------------------------------------------

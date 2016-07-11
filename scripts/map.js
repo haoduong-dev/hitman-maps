@@ -1,10 +1,7 @@
 
 
-var db = new loki('hmm', {autosave: true, autoload: true});
-
-var dbItem = db.addCollection('item');
-var dbMarker = db.addCollection('marker_' + mapName);
-
+var dbItem = TAFFY();
+var dbMarker = TAFFY();
 var isEditMode = false;
 var isEditing = false;
 
@@ -37,12 +34,12 @@ L.PopupEx = L.Popup.extend({
 		var itemInput = this._itemInput = L.DomUtil.create('select', 'marker-item-select', itemContainer);
 
         var option;
-		dbItem.data.forEach(function(rec) {
-            var iconName = rec.icon;
+        dbItem().each(function(record) {
+            var iconName = record.icon;
             if (!iconName) {
-                iconName = rec.item;
+                iconName = record.item;
             }
-            option = new Option(rec.name, rec.item);
+            option = new Option(record.name, record.item);
             option.setAttribute('data-imagesrc', 'img/icons/' + iconName + '.png');
             itemInput.add(option);
         });
@@ -137,28 +134,28 @@ L.PopupEx = L.Popup.extend({
 		// Update DB
 		if (marker._id) {
 			// Process for existed record
-			var updMarker = dbMarker.get(marker._id);
-			updMarker.x = marker.getLatLng().lng;
-			updMarker.y = marker.getLatLng().lat;
-			updMarker.item = this._itemInput.value;
-			updMarker.icon = this._iconInput.value;
-			updMarker.title = this._titleInput.value;
-			updMarker.description = this._descriptionInput.value;
-			dbMarker.update(updMarker);
+			dbMarker(marker._id).update({
+                x: marker.getLatLng().lng,
+                y: marker.getLatLng().lat,
+				item: this._itemInput.value,
+                icon: this._iconInput.value,
+				title: this._titleInput.value,
+				description: this._descriptionInput.value
+			});
 		} else {
 			// Process for new record
 			var addedRecord = dbMarker.insert({
 				level: parseInt(marker._level, 10),
-				x: marker.getLatLng().lng,
+                x: marker.getLatLng().lng,
                 y: marker.getLatLng().lat,
 				item: this._itemInput.value,
-				icon: this._iconInput.value,
+                icon: this._iconInput.value,
 				title: this._titleInput.value,
 				description: this._descriptionInput.value
-			});
+			}).first();
 
 			// Update marker id
-			marker._id = addedRecord.$loki;
+			marker._id = addedRecord.___id;
 		}
 
 		// Update marker: internal var
@@ -187,8 +184,6 @@ L.PopupEx = L.Popup.extend({
 	},
 
 	_onCancelButtonClick: function (e) {
-		// TODO reset values
-
 		this._onCloseButtonClick(e);
 	},
 
@@ -196,7 +191,7 @@ L.PopupEx = L.Popup.extend({
 		var marker = this._source;
 
 		// Update DB
-		dbMarker.remove(dbMarker.get(marker._id));
+		dbMarker(marker._id).remove();
 
 		// Remove marker from map
 		this._map.removeLayer(marker);
@@ -357,10 +352,7 @@ function cont_markers() {
         var counter = 0;
         $(".marker-category li").not(".hide").each(function() {
             var tarItem = $(this).attr("id").substr(2);
-			counter = counter + dbMarker.chain().find({'$and': [
-					{level: tarLevel},
-					{item: tarItem}
-			]}).count();
+            counter = counter + dbMarker({level:tarLevel, item:tarItem}).count();
         });
 		if (0 == counter) {
             $(this).hide();
@@ -376,11 +368,15 @@ function processMap() {
         isDataLoaded = true;
     }
 	if (isDataLoaded) {
+
+        dbItem.store("hmm_item");
+
         // Current map
         window.openedMap = $(".leaflet-map").attr("id");
 
-		dbMarker.data.forEach(function(rec) {
-            allMarkers.addLayer(new L.MarkerEx(rec.$loki, rec.level, rec.x, rec.y, rec.item, rec.icon, rec.title, rec.description));
+        dbMarker.store("hmm_marker_" + mapName);
+        dbMarker().each(function(record) {
+            allMarkers.addLayer(new L.MarkerEx(record.___id, record.level, record.x, record.y, record.item, record.icon, record.title, record.description));
         });
         window[openedMap].addLayer(allMarkers);
 
@@ -674,9 +670,9 @@ function processMap() {
 
 
 $("#download-db").on("mousedown", function() {
-	var blobDb = new Blob([JSON.stringify(dbMarker.data)]);
+	var blobDb = new Blob([dbMarker().stringify()]);
 	$("#download-db").attr('href', window.URL.createObjectURL(blobDb));
-	$("#download-db").attr('download', 'local_marker_' + mapName + '.json');
+	$("#download-db").attr("download", "db_marker.json");
 });
 
 /*--------------------------------------------------------------------------------*/
@@ -711,20 +707,18 @@ var isTblMarkerMapLoaded = false;
 
 // Load DB master table [item]
 $.get("data/item.json", function(data) {
-	dbItem.insert(JSON.parse(data));
-
-	// TODO import existed data
-	// dbItem.data = JSON.parse(data);
+    var db = TAFFY(data);
+    localStorage.removeItem("taffy_hmm_item");
+    db.store("hmm_item");
 
     isTblItemLoaded = true;
 }, 'text');
 
 // Load DB table [marker_<map>]
 $.get("data/marker_" + mapName + ".json", function(data) {
-	// TODO add new data
-	// dbMarker.insert(JSON.parse(data));
-
-	dbMarker.data = JSON.parse(data);
+    var db = TAFFY(data);
+    localStorage.removeItem("taffy_hmm_marker_" + mapName);
+    db.store("hmm_marker_" + mapName);
 
     isTblMarkerMapLoaded = true;
 }, 'text');

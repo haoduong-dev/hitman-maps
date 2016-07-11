@@ -1,1 +1,74 @@
-[{"level":0,"x":-42.4,"y":57.68,"item":"enter","icon":"","title":"Starting Location: Undercover in Kitchen","description":"<img src='img/map_paris/screenshots/lvl0_enter1.jpg'><h2>Starting Location</h2><h1>Undercover in Kitchen</h1>","meta":{"revision":0,"created":1468220584024,"version":0},"$loki":1},{"level":0,"x":-9.4,"y":65.29,"item":"enter","icon":"","title":"Starting Location: Undercover in Locker Room","description":"<img src='img/map_paris/screenshots/lvl0_enter2.jpg'><h2>Starting Location</h2><h1>Undercover in Locker Room</h1>","meta":{"revision":0,"created":1468220584024,"version":0},"$loki":2},{"level":1,"x":-20.69,"y":68.64,"item":"sab-chandelier","icon":"sabotage","title":"Chandelier (6)","description":"<h2>Sabotage</h2><h1>Chandelier (6)</h1>","meta":{"revision":0,"created":1468220584024,"version":0},"$loki":3},{"level":2,"x":-8.5,"y":65.9,"item":"camera","icon":"","title":"Security Camera","description":"","meta":{"revision":0,"created":1468220584024,"version":0},"$loki":4},{"level":2,"x":-8.5,"y":59.7,"item":"camera","icon":"","title":"Security Camera","description":"","meta":{"revision":0,"created":1468220584024,"version":0},"$loki":5},{"level":2,"x":-31.86,"y":66.31,"item":"camera","icon":"","title":"Security Camera","description":"","meta":{"revision":0,"created":1468220584024,"version":0},"$loki":6},{"level":1,"x":-27.42,"y":70.58,"item":"sab-chandelier","icon":"point_red","title":"Winch","description":"<h2>Sabotage</h2><h1>Winch</h1><p class='item-use'>Release Winch</p><p class='susp'>Suspicious in any disguise</p>","meta":{"revision":0,"created":1468220584024,"version":0},"$loki":7},{"level":1,"x":-10.89,"y":67.84,"item":"sab-chandelier","icon":"point_red","title":"Winch","description":"<h2>Sabotage</h2><h1>Winch</h1><p class='item-use'>Release Winch</p><p class='susp'>Suspicious in any disguise</p>","meta":{"revision":0,"created":1468220584024,"version":0},"$loki":8}]
+[
+  {
+	"level": 0,
+    "x": -42.4,
+    "y": 57.68,
+	"item": "enter",
+    "icon": "",
+	"title": "Starting Location: Undercover in Kitchen",
+	"description": "<img src='img/map_paris/screenshots/lvl0_enter1.jpg'><h2>Starting Location</h2><h1>Undercover in Kitchen</h1>"
+  },
+  {
+	"level": 0,
+    "x": -9.4,
+    "y": 65.29,
+	"item": "enter",
+    "icon": "",
+	"title": "Starting Location: Undercover in Locker Room",
+	"description": "<img src='img/map_paris/screenshots/lvl0_enter2.jpg'><h2>Starting Location</h2><h1>Undercover in Locker Room</h1>"
+  },
+  {
+    "level": 1,
+    "x": -20.69,
+    "y": 68.64,
+    "item": "sab-chandelier",
+    "icon": "sabotage",
+    "title": "Chandelier (6)",
+    "description": "<h2>Sabotage</h2><h1>Chandelier (6)</h1>"
+  },
+  {
+    "level": 2,
+    "x": -8.5,
+    "y": 65.9,
+    "item": "camera",
+    "icon": "",
+    "title": "Security Camera",
+    "description": ""
+  },
+  {
+    "level": 2,
+    "x": -8.5,
+    "y": 59.7,
+    "item": "camera",
+    "icon": "",
+    "title": "Security Camera",
+    "description": ""
+  },
+  {
+    "level": 2,
+    "x": -31.86,
+    "y": 66.31,
+    "item": "camera",
+    "icon": "",
+    "title": "Security Camera",
+    "description": ""
+  },
+  {
+    "level": 1,
+    "x": -27.42,
+    "y": 70.58,
+    "item": "sab-chandelier",
+    "icon": "point_red",
+    "title": "Winch",
+    "description": "<h2>Sabotage</h2><h1>Winch</h1><p class='item-use'>Release Winch</p><p class='susp'>Suspicious in any disguise</p>"
+  },
+  {
+    "level": 1,
+    "x": -10.89,
+    "y": 67.84,
+    "item": "sab-chandelier",
+    "icon": "point_red",
+    "title": "Winch",
+    "description": "<h2>Sabotage</h2><h1>Winch</h1><p class='item-use'>Release Winch</p><p class='susp'>Suspicious in any disguise</p>"
+  }
+]

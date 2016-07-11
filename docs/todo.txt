@@ -13,6 +13,7 @@ OK TODO description (Assignee)
 --------------------------------------------------------------------------------
 
 HIGH
++ Remove all img off GitHub
 + DB support multiple level categories
   group lv 1: category. required. show on side bar.
   group lv 2: sub category. if no this level, set empty. show on side bar (optional).

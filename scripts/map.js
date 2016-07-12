@@ -35,8 +35,8 @@ L.PopupEx = L.Popup.extend({
 		var descriptionContainer = L.DomUtil.create('div', 'popup-description-container', editContentNode);
 		var buttonContainer = L.DomUtil.create('div', 'popup-button-container', editContentNode);
 
-		var itemLabel = L.DomUtil.create('div', 'marker-item-label', itemContainer);
-		itemLabel.innerHTML = 'Item:';
+		var itemLabel = L.DomUtil.create('span', 'marker-item-label', itemContainer);
+		itemLabel.innerHTML = 'Groups:';
 		var itemInput = this._itemInput = L.DomUtil.create('select', 'marker-item-select', itemContainer);
 
         var option;
@@ -50,7 +50,7 @@ L.PopupEx = L.Popup.extend({
             itemInput.add(option);
         });
 
-        var iconLabel = L.DomUtil.create('div', 'marker-icon-label', iconContainer);
+        var iconLabel = L.DomUtil.create('span', 'marker-icon-label', iconContainer);
         iconLabel.innerHTML = 'Icon:';
         var iconInput = this._iconInput = L.DomUtil.create('select', 'marker-icon-select', iconContainer);
         iconInput.add(new Option('', ''));
@@ -64,26 +64,59 @@ L.PopupEx = L.Popup.extend({
         option.setAttribute('data-imagesrc', 'img/icons/point_red.png');
         iconInput.add(option);
 
-		var titleLabel = L.DomUtil.create('div', 'marker-title-label', titleContainer);
+		var titleLabel = L.DomUtil.create('span', 'marker-title-label', titleContainer);
 		titleLabel.innerHTML = 'Title:';
 		var titleInput = this._titleInput = L.DomUtil.create('input', 'marker-title-text', titleContainer);
-		titleInput.size = 37;
+		titleInput.size = 10;
 
-		var descriptionLabel = L.DomUtil.create('div', 'marker-description-label', descriptionContainer);
+        var qtyLabel = L.DomUtil.create('span', 'marker-qty-label', titleContainer);
+        qtyLabel.innerHTML = '&nbsp;Quantity:';
+        var qtyInput = this._qtyInput = L.DomUtil.create('input', 'marker-qty-text', titleContainer);
+        qtyInput.size = 2;
+
+		var descriptionLabel = L.DomUtil.create('span', 'marker-description-label', descriptionContainer);
 		descriptionLabel.innerHTML = 'Description:';
-		var descriptionInput = this._descriptionInput = L.DomUtil.create('textarea', 'marker-description-text', descriptionContainer);
-		descriptionInput.style.height = '100px';
-		descriptionInput.style.width = '290px';
+		var descriptionInput = this._descriptionInput = L.DomUtil.create('input', 'marker-description-text', descriptionContainer);
+		// descriptionInput.style.height = '100px';
+		// descriptionInput.style.width = '290px';
+
+        var imgLabel = L.DomUtil.create('span', 'marker-img-label', descriptionContainer);
+        imgLabel.innerHTML = '<br>&nbsp;&nbsp;img:';
+        var imgInput = this._imgInput = L.DomUtil.create('input', 'marker-img-text', descriptionContainer);
+
+        var h2Label = L.DomUtil.create('span', 'marker-h2-label', descriptionContainer);
+        h2Label.innerHTML = '<br>&nbsp;&nbsp;H2:';
+        var h2Input = this._h2Input = L.DomUtil.create('input', 'marker-h2-text', descriptionContainer);
+
+        var h1Label = L.DomUtil.create('span', 'marker-h1-label', descriptionContainer);
+        h1Label.innerHTML = '<br>&nbsp;&nbsp;H1:';
+        var h1Input = this._h1Input = L.DomUtil.create('input', 'marker-h1-text', descriptionContainer);
+
+        var p1Label = L.DomUtil.create('span', 'marker-p1-label', descriptionContainer);
+        p1Label.innerHTML = '<br>&nbsp;&nbsp;p1:';
+        var p1Input = this._p1Input = L.DomUtil.create('input', 'marker-p1-text', descriptionContainer);
+
+        var p2Label = L.DomUtil.create('span', 'marker-p2-label', descriptionContainer);
+        p2Label.innerHTML = '<br>&nbsp;&nbsp;p2:';
+        var p2Input = this._p2Input = L.DomUtil.create('input', 'marker-p2-text', descriptionContainer);
+
+        L.DomUtil.create('span', '', descriptionContainer).innerHTML = '<br>&nbsp;';
+
+        L.DomUtil.create('span', '', buttonContainer).innerHTML = '&nbsp;&nbsp;';
 
 		var saveButton = L.DomUtil.create('button', 'popup-save-button', buttonContainer);
 		saveButton.innerHTML = 'Save';
 		L.DomEvent.disableClickPropagation(saveButton);
 		L.DomEvent.on(saveButton, 'click', this._onSaveButtonClick, this);
 
+        L.DomUtil.create('span', '', buttonContainer).innerHTML = '&nbsp;&nbsp;';
+
 		var cancelButton = L.DomUtil.create('button', 'popup-cancel-button', buttonContainer);
 		cancelButton.innerHTML = 'Cancel';
 		L.DomEvent.disableClickPropagation(cancelButton);
 		L.DomEvent.on(cancelButton, 'click', this._onCancelButtonClick, this);
+
+        L.DomUtil.create('span', '', buttonContainer).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 
 		var deleteButton = this._deleteButton = L.DomUtil.create('button', 'popup-delete-button', buttonContainer);
 		deleteButton.innerHTML = 'Delete';
@@ -117,12 +150,12 @@ L.PopupEx = L.Popup.extend({
 				$(this._deleteButton).hide();
 			}
 
-            $(".marker-item-select").ddslick({
-                height: 200
-            });
-            $(".marker-icon-select").ddslick({
-                height: 100
-            });
+            // $(".marker-item-select").ddslick({
+            //     height: 200
+            // });
+            // $(".marker-icon-select").ddslick({
+            //     height: 100
+            // });
 		} else {
 			$(this._editContentNode).hide();
 			$(this._contentNode).show();
@@ -134,8 +167,8 @@ L.PopupEx = L.Popup.extend({
 	_onSaveButtonClick: function (e) {
 		var marker = this._source;
 
-        $(".marker-item-select").ddslick('destroy');
-        $(".marker-icon-select").ddslick('destroy');
+        // $(".marker-item-select").ddslick('destroy');
+        // $(".marker-icon-select").ddslick('destroy');
 
 		// Update DB
 		if (marker._id) {

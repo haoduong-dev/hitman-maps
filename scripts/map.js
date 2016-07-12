@@ -2,8 +2,11 @@
 
 var db = new loki('hmm', {autosave: true, autoload: true});
 
-var dbItem = db.addCollection('item');
-var dbMarker = db.addCollection('marker_' + mapName);
+// var dbItem = db.addCollection('item');
+// var dbMarker = db.addCollection('marker_' + mapName);
+
+var dbItem;
+var dbMarker;
 
 var isEditMode = false;
 var isEditing = false;
@@ -137,7 +140,7 @@ L.PopupEx = L.Popup.extend({
 		// Update DB
 		if (marker._id) {
 			// Process for existed record
-			var updMarker = dbMarker.get(marker._id);
+			var updMarker = dbMarker.get(marker._id, false);
 			updMarker.x = marker.getLatLng().lng;
 			updMarker.y = marker.getLatLng().lat;
 			updMarker.item = this._itemInput.value;
@@ -196,7 +199,7 @@ L.PopupEx = L.Popup.extend({
 		var marker = this._source;
 
 		// Update DB
-		dbMarker.remove(dbMarker.get(marker._id));
+		dbMarker.remove(dbMarker.get(marker._id, false));
 
 		// Remove marker from map
 		this._map.removeLayer(marker);
@@ -372,9 +375,9 @@ function cont_markers() {
 
 // Main processing: wait until finished loading data from remote server
 function processMap() {
-    if (isTblItemLoaded && isTblMarkerMapLoaded) {
-        isDataLoaded = true;
-    }
+    // if (isTblItemLoaded && isTblMarkerMapLoaded) {
+    //     isDataLoaded = true;
+    // }
 	if (isDataLoaded) {
         // Current map
         window.openedMap = $(".leaflet-map").attr("id");
@@ -674,9 +677,9 @@ function processMap() {
 
 
 $("#download-db").on("mousedown", function() {
-	var blobDb = new Blob([JSON.stringify(dbMarker.data)]);
+	var blobDb = new Blob([db.serialize()]);
 	$("#download-db").attr('href', window.URL.createObjectURL(blobDb));
-	$("#download-db").attr('download', 'local_marker_' + mapName + '.json');
+	$("#download-db").attr('download', 'local_map_' + mapName + '.json');
 });
 
 /*--------------------------------------------------------------------------------*/
@@ -704,29 +707,36 @@ lmap.on('draw:created', function(evt) {
 
 
 var isDataLoaded = false;
-var isTblItemLoaded = false;
-var isTblMarkerMapLoaded = false;
+// var isTblItemLoaded = false;
+// var isTblMarkerMapLoaded = false;
 
-// Load data from remote server
 
 // Load DB master table [item]
-$.get("data/item.json", function(data) {
-	dbItem.insert(JSON.parse(data));
-
-	// TODO import existed data
-	// dbItem.data = JSON.parse(data);
-
-    isTblItemLoaded = true;
-}, 'text');
+// $.get("data/item.json", function(data) {
+// 	dbItem.insert(JSON.parse(data));
+//
+// 	// dbItem.data = JSON.parse(data);
+//
+//     isTblItemLoaded = true;
+// }, 'text');
 
 // Load DB table [marker_<map>]
-$.get("data/marker_" + mapName + ".json", function(data) {
-	// TODO add new data
-	// dbMarker.insert(JSON.parse(data));
+// $.get("data/marker_" + mapName + ".json", function(data) {
+// 	dbMarker.insert(JSON.parse(data));
+//
+// 	// dbMarker.data = JSON.parse(data);
+//
+//     isTblMarkerMapLoaded = true;
+// }, 'text');
 
-	dbMarker.data = JSON.parse(data);
+// Load whole database from remote server
+$.get("data/map_" + mapName + ".json", function(data) {
+    db.loadJSON(data, null);
 
-    isTblMarkerMapLoaded = true;
+    dbItem = db.getCollection('item');
+    dbMarker = db.getCollection('marker_' + mapName);
+
+    isDataLoaded = true;
 }, 'text');
 
 processMap();

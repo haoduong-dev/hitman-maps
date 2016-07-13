@@ -1,16 +1,17 @@
 
+var _NEW_DATA_ = true;
 
 var db = new loki('hmm', {autosave: true, autoload: true});
-
-// var dbItem = db.addCollection('item');
-// var dbMarker = db.addCollection('marker_' + mapName);
-
 var dbItem;
 var dbMarker;
 
+if (_NEW_DATA_) {
+	dbItem = db.addCollection('item');
+	dbMarker = db.addCollection('marker_' + mapName);
+}
+
 var isEditMode = false;
 var isEditing = false;
-
 
 L.IconEx = L.Icon.extend({
     options: {
@@ -385,7 +386,6 @@ L.setOptions(L.Draw.MarkerEx.prototype, {
 	subToolbar: new L.Toolbar({ actions: [L.Draw.Cancel] })
 });
 
-
 // Count all markers
 function cont_markers() {
     $(".marker-count").each(function() {
@@ -408,9 +408,11 @@ function cont_markers() {
 
 // Main processing: wait until finished loading data from remote server
 function processMap() {
-    // if (isTblItemLoaded && isTblMarkerMapLoaded) {
-    //     isDataLoaded = true;
-    // }
+	if (_NEW_DATA_) {
+		if (isTblItemLoaded && isTblMarkerMapLoaded) {
+		    isDataLoaded = true;
+		}
+	}
 	if (isDataLoaded) {
         // Current map
         window.openedMap = $(".leaflet-map").attr("id");
@@ -419,7 +421,6 @@ function processMap() {
             allMarkers.addLayer(new L.MarkerEx(rec.$loki, rec.level, rec.x, rec.y, rec.item, rec.icon, rec.title, rec.description));
         });
         window[openedMap].addLayer(allMarkers);
-
 
 		// Current level of map
 		window.openedMapID = $(".change-level.active").attr("id").substr(6, 7);
@@ -444,7 +445,6 @@ function processMap() {
                 $(this).css("background", "url('img/icons/" + a + ".png') no-repeat left");
             }
 		});
-
 
 		// SearchBar dropdown: select
 		$("#searchbar").chosen({
@@ -708,7 +708,6 @@ function processMap() {
 	}
 }
 
-
 $("#download-db").on("mousedown", function() {
 	var blobDb = new Blob([db.serialize()]);
 	$("#download-db").attr('href', window.URL.createObjectURL(blobDb));
@@ -718,7 +717,6 @@ $("#download-db").on("mousedown", function() {
 /*--------------------------------------------------------------------------------*/
 
 var drawnItems = new L.FeatureGroup().addTo(lmap);
-
 
 new L.DrawToolbar.Control({ 
 	position: 'topright',
@@ -738,38 +736,39 @@ lmap.on('draw:created', function(evt) {
 	drawnItems.addLayer(layer);
 });
 
-
 var isDataLoaded = false;
-// var isTblItemLoaded = false;
-// var isTblMarkerMapLoaded = false;
 
+if (_NEW_DATA_) {
+	var isTblItemLoaded = false;
+	var isTblMarkerMapLoaded = false;
 
-// Load DB master table [item]
-// $.get("data/item.json", function(data) {
-// 	dbItem.insert(JSON.parse(data));
-//
-// 	// dbItem.data = JSON.parse(data);
-//
-//     isTblItemLoaded = true;
-// }, 'text');
+	// Load DB master table [item]
+	$.get("data/item.json", function(data) {
+		dbItem.insert(JSON.parse(data));
 
-// Load DB table [marker_<map>]
-// $.get("data/marker_" + mapName + ".json", function(data) {
-// 	dbMarker.insert(JSON.parse(data));
-//
-// 	// dbMarker.data = JSON.parse(data);
-//
-//     isTblMarkerMapLoaded = true;
-// }, 'text');
+		// dbItem.data = JSON.parse(data);
 
-// Load whole database from remote server
-$.get("data/map_" + mapName + ".json", function(data) {
-    db.loadJSON(data, null);
+		isTblItemLoaded = true;
+	}, 'text');
 
-    dbItem = db.getCollection('item');
-    dbMarker = db.getCollection('marker_' + mapName);
+	// Load DB table [marker_<map>]
+	$.get("data/marker_" + mapName + ".json", function(data) {
+		dbMarker.insert(JSON.parse(data));
 
-    isDataLoaded = true;
-}, 'text');
+		// dbMarker.data = JSON.parse(data);
+
+		isTblMarkerMapLoaded = true;
+	}, 'text');
+} else {
+	// Load whole database from remote server
+	$.get("data/map_" + mapName + ".json", function(data) {
+		db.loadJSON(data, null);
+
+		dbItem = db.getCollection('item');
+		dbMarker = db.getCollection('marker_' + mapName);
+
+		isDataLoaded = true;
+	}, 'text');
+}
 
 processMap();

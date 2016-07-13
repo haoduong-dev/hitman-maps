@@ -1,0 +1,42 @@
+[
+  {
+    "parent": "",
+    "name": "poi",
+    "order": 1
+  },
+  {
+    "parent": "",
+    "name": "weapons",
+    "order": 2
+  },
+  {
+    "parent": "",
+    "name": "other",
+    "order": 3
+  },
+  {
+    "parent": "poi",
+    "name": "sabotage",
+    "order": 1
+  },
+  {
+    "parent": "poi",
+    "name": "distraction",
+    "order": 2
+  },
+  {
+    "parent": "poi",
+    "name": "poison",
+    "order": 3
+  },
+  {
+    "parent": "poi",
+    "name": "alarm",
+    "order": 4
+  },
+  {
+    "parent": "poi",
+    "name": "disguise",
+    "order": 5
+  }
+]

@@ -1,0 +1,10 @@
+JSON
+{myCollection: [{prop1:"test"}, /* more objects*/]}
+
+// myCollectionObject is the collection instance of your loki instance
+// json is the json string from above 
+myCollectionObject.insert(JSON.parse(json).myCollection);
+
+
+max group = 5
+max desc p = 9

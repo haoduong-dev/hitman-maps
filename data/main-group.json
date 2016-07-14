@@ -1,42 +1,52 @@
 [
   {
-    "parent": "",
+    "group-id": 1,
     "name": "poi",
     "order": 1
   },
   {
-    "parent": "",
+    "group-id": 2,
     "name": "weapons",
     "order": 2
   },
   {
-    "parent": "",
+    "group-id": 3,
     "name": "other",
     "order": 3
   },
   {
-    "parent": "poi",
+    "group-id": 4,
     "name": "sabotage",
     "order": 1
   },
   {
-    "parent": "poi",
+    "group-id": 5,
     "name": "distraction",
     "order": 2
   },
   {
-    "parent": "poi",
+    "group-id": 6,
     "name": "poison",
     "order": 3
   },
   {
-    "parent": "poi",
-    "name": "alarm",
+    "group-id": 7,
+    "name": "blank",
     "order": 4
   },
   {
-    "parent": "poi",
-    "name": "disguise",
-    "order": 5
+    "group-id": 8,
+    "name": "lethalwea",
+    "order": 1
+  },
+  {
+    "group-id": 9,
+    "name": "nonlethalwea",
+    "order": 2
+  },
+  {
+    "group-id": 10,
+    "name": "sab-chandelier",
+    "order": 1
   }
 ]

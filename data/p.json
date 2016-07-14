@@ -1,0 +1,37 @@
+[
+  {
+    "class": "item-use",
+    "text-template": "",
+    "text-default": ""
+  },
+  {
+    "class": "item-poison",
+    "text-template": "",
+    "text-default": ""
+  },
+  {
+    "class": "req",
+    "text-template": "Requires $1",
+    "text-default": ""
+  },
+  {
+    "class": "susp",
+    "text-template": "Suspicious unless disguised as<br>$1",
+    "text-default": "Suspicious in any disguise"
+  },
+  {
+    "class": "note",
+    "text-template": "",
+    "text-default": ""
+  },
+  {
+    "class": "ingame-desc",
+    "text-template": "<b>In-game description:</b><br>$1",
+    "text-default": ""
+  },
+  {
+    "class": "item-ammo",
+    "text-template": "",
+    "text-default": ""
+  }
+]

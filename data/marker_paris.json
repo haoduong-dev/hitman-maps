@@ -3,26 +3,8 @@
     "level": 1,
     "x": -20.69,
     "y": 68.64,
-    "groups": [
-      "poi",
-      "sabotage",
-      "sab-chandelier"
-    ],
+    "group-id": 10,
     "point": 0,
-    "title": "TiTlE",
-    "quantity": 6,
-    "desc-img": "lvl0_enter1.jpg",
-    "desc-h2": "HEADER 2",
-    "desc-h1": "header 1",
-    "desc-ps": [
-      {
-        "class": "item-use",
-        "text": "Item Use."
-      },
-      {
-        "class": "req",
-        "text": "REQUIRED!"
-      }
-    ]
+    "quantity": 6
   }
 ]

@@ -1,177 +1,82 @@
 [
   {
-    "parent": "",
-    "name": "poi",
-    "text": "Points of Interest"
+    "parent-id": 0,
+    "text": "Points of Interest",
+    "title": "",
+    "desc-img": "",
+    "desc-h2": "",
+    "desc-h1": ""
   },
   {
-    "parent": "",
-    "name": "weapons",
-    "text": "Weapons and Tools"
+    "parent-id": 0,
+    "text": "Weapons and Tools",
+    "title": "",
+    "desc-img": "",
+    "desc-h2": "",
+    "desc-h1": ""
   },
   {
-    "parent": "",
-    "name": "other",
-    "text": "Navigation"
+    "parent-id": 0,
+    "text": "Navigation",
+    "title": "",
+    "desc-img": "",
+    "desc-h2": "",
+    "desc-h1": ""
   },
   {
-    "parent": "poi",
-    "name": "sabotage",
-    "text": "Sabotage"
+    "parent-id": 1,
+    "text": "Sabotage",
+    "title": "",
+    "desc-img": "",
+    "desc-h2": "",
+    "desc-h1": ""
   },
   {
-    "parent": "poi",
-    "name": "distraction",
-    "text": "Distraction"
+    "parent-id": 1,
+    "text": "Distraction",
+    "title": "",
+    "desc-img": "",
+    "desc-h2": "",
+    "desc-h1": ""
   },
   {
-    "parent": "poi",
-    "name": "poison",
-    "text": "Poison"
+    "parent-id": 1,
+    "text": "Poison",
+    "title": "",
+    "desc-img": "",
+    "desc-h2": "",
+    "desc-h1": ""
   },
   {
-    "parent": "poi",
-    "name": "alarm",
-    "text": "Alarm"
+    "parent-id": 1,
+    "text": "note",
+    "title": "",
+    "desc-img": "",
+    "desc-h2": "",
+    "desc-h1": ""
   },
   {
-    "parent": "poi",
-    "name": "disguise",
-    "text": "Disguise"
+    "parent-id": 2,
+    "text": "Lethal Melee",
+    "title": "",
+    "desc-img": "",
+    "desc-h2": "",
+    "desc-h1": ""
   },
   {
-    "parent": "poi",
-    "name": "blend",
-    "text": "Blend In"
+    "parent-id": 2,
+    "text": "Non-lethal Melee",
+    "title": "",
+    "desc-img": "",
+    "desc-h2": "",
+    "desc-h1": ""
   },
   {
-    "parent": "poi",
-    "name": "camera",
-    "text": "Camera"
-  },
-  {
-    "parent": "poi",
-    "name": "evnameence",
-    "text": "Evnameence"
-  },
-  {
-    "parent": "poi",
-    "name": "item",
-    "text": "Item"
-  },
-  {
-    "parent": "poi",
-    "name": "location",
-    "text": "Location"
-  },
-  {
-    "parent": "poi",
-    "name": "interaction",
-    "text": "Interaction"
-  },
-  {
-    "parent": "poi",
-    "name": "intel",
-    "text": "Intel"
-  },
-  {
-    "parent": "poi",
-    "name": "locked",
-    "text": "Locked"
-  },
-  {
-    "parent": "poi",
-    "name": "seccheck",
-    "text": "Security Check"
-  },
-  {
-    "parent": "poi",
-    "name": "container",
-    "text": "Hnameing Spot"
-  },
-  {
-    "parent": "poi",
-    "name": "conceal",
-    "text": "Conceal Item"
-  },
-  {
-    "parent": "poi",
-    "name": "blank",
-    "text": "note"
-  },
-  {
-    "parent": "weapons",
-    "name": "lethalwea",
-    "text": "Lethal Melee"
-  },
-  {
-    "parent": "weapons",
-    "name": "nonlethalwea",
-    "text": "Non-lethal Melee"
-  },
-  {
-    "parent": "weapons",
-    "name": "weapoison",
-    "text": "Poison"
-  },
-  {
-    "parent": "weapons",
-    "name": "firearm",
-    "text": "Firearm"
-  },
-  {
-    "parent": "weapons",
-    "name": "explosive",
-    "text": "Explosive"
-  },
-  {
-    "parent": "weapons",
-    "name": "ammo",
-    "text": "Ammo"
-  },
-  {
-    "parent": "weapons",
-    "name": "coin",
-    "text": "Coin"
-  },
-  {
-    "parent": "sabotage",
-    "name": "sab-chandelier",
-    "text": "Chandelier"
-  },
-  {
-    "parent": "sabotage",
-    "name": "sab-heater",
-    "text": "Gas Heater Lamp"
-  },
-  {
-    "parent": "sabotage",
-    "name": "sab-canister",
-    "text": "Gas Canister"
-  },
-  {
-    "parent": "sabotage",
-    "name": "sab-drum",
-    "text": "Gasoline Drum"
-  },
-  {
-    "parent": "sabotage",
-    "name": "sab-winch",
-    "text": "Light Rig Winch"
-  },
-  {
-    "parent": "sabotage",
-    "name": "sab-mounting",
-    "text": "Loudspeaker"
-  },
-  {
-    "parent": "sabotage",
-    "name": "sab-leak",
-    "text": "Stove"
-  },
-  {
-    "parent": "sabotage",
-    "name": "sab-wire",
-    "text": "Wire Plug"
+    "parent-id": 4,
+    "text": "Chandelier",
+    "title": "",
+    "desc-img": "",
+    "desc-h2": "",
+    "desc-h1": ""
   }
 ]

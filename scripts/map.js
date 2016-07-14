@@ -1,18 +1,4 @@
 
-var _NEW_DATA_ = true;
-
-var db = new loki('hmm', {autosave: true, autoload: true});
-var dbItem;
-var dbMarker;
-
-if (_NEW_DATA_) {
-	dbItem = db.addCollection('item');
-	dbMarker = db.addCollection('marker_' + mapName);
-}
-
-var isEditMode = false;
-var isEditing = false;
-
 L.IconEx = L.Icon.extend({
     options: {
         iconSize:     [32, 32],
@@ -40,16 +26,16 @@ L.PopupEx = L.Popup.extend({
 		itemLabel.innerHTML = 'Groups:';
 		var itemInput = this._itemInput = L.DomUtil.create('select', 'marker-item-select', itemContainer);
 
-        var option;
-		dbItem.data.forEach(function(rec) {
-            var iconName = rec.icon;
-            if (!iconName) {
-                iconName = rec.item;
-            }
-            option = new Option(rec.name, rec.item);
-            option.setAttribute('data-imagesrc', 'img/icons/' + iconName + '.png');
-            itemInput.add(option);
-        });
+        // var option;
+		// dbItem.data.forEach(function(rec) {
+        //     var iconName = rec.icon;
+        //     if (!iconName) {
+        //         iconName = rec.item;
+        //     }
+        //     option = new Option(rec.name, rec.item);
+        //     option.setAttribute('data-imagesrc', 'img/icons/' + iconName + '.png');
+        //     itemInput.add(option);
+        // });
 
         var iconLabel = L.DomUtil.create('span', 'marker-icon-label', iconContainer);
         iconLabel.innerHTML = 'Icon:';
@@ -393,10 +379,10 @@ function cont_markers() {
         var counter = 0;
         $(".marker-category li").not(".hide").each(function() {
             var tarItem = $(this).attr("id").substr(2);
-			counter = counter + dbMarker.chain().find({'$and': [
-					{level: tarLevel},
-					{item: tarItem}
-			]}).count();
+			// counter = counter + dbMarker.chain().find({'$and': [
+			// 		{level: tarLevel},
+			// 		{item: tarItem}
+			// ]}).count();
         });
 		if (0 == counter) {
             $(this).hide();
@@ -409,7 +395,8 @@ function cont_markers() {
 // Main processing: wait until finished loading data from remote server
 function processMap() {
 	if (_NEW_DATA_) {
-		if (isTblItemLoaded && isTblMarkerMapLoaded) {
+		// if (isTblItemLoaded && isTblMarkerMapLoaded) {
+		if (isPLoaded && isDescPLoaded && isGroupLoaded && isGroupDescPLoaded && isMainGroupLoaded && isMapMarkerLoaded ) {
 		    isDataLoaded = true;
 		}
 	}
@@ -417,9 +404,9 @@ function processMap() {
         // Current map
         window.openedMap = $(".leaflet-map").attr("id");
 
-		dbMarker.data.forEach(function(rec) {
-            allMarkers.addLayer(new L.MarkerEx(rec.$loki, rec.level, rec.x, rec.y, rec.item, rec.icon, rec.title, rec.description));
-        });
+		// dbMarker.data.forEach(function(rec) {
+        //     allMarkers.addLayer(new L.MarkerEx(rec.$loki, rec.level, rec.x, rec.y, rec.item, rec.icon, rec.title, rec.description));
+        // });
         window[openedMap].addLayer(allMarkers);
 
 		// Current level of map
@@ -716,6 +703,40 @@ $("#download-db").on("mousedown", function() {
 
 /*--------------------------------------------------------------------------------*/
 
+var _NEW_DATA_ = true;
+
+var db = new loki('hmm', {autosave: true, autoload: true});
+// var dbItem;
+// var dbMarker;
+var collP;
+var collDescP;
+var collGroup;
+var collGroupDescP;
+var collMainGroup;
+var collMapMarker;
+
+var isPLoaded = false;
+var isDescPLoaded = false;
+var isGroupLoaded = false;
+var isGroupDescPLoaded = false;
+var isMainGroupLoaded = false;
+var isMapMarkerLoaded = false;
+var isDataLoaded = false;
+
+var isEditMode = false;
+var isEditing = false;
+
+if (_NEW_DATA_) {
+	// dbItem = db.addCollection('item');
+	// dbMarker = db.addCollection('marker_' + mapName);
+	collP = db.addCollection('p');
+	collDescP = db.addCollection('desc-p');
+	collGroup = db.addCollection('group');
+	collGroupDescP = db.addCollection('group-desc-p');
+	collMainGroup = db.addCollection('main-group');
+	collMapMarker = db.addCollection('marker_' + mapName);
+}
+
 var drawnItems = new L.FeatureGroup().addTo(lmap);
 
 new L.DrawToolbar.Control({ 
@@ -736,36 +757,64 @@ lmap.on('draw:created', function(evt) {
 	drawnItems.addLayer(layer);
 });
 
-var isDataLoaded = false;
-
 if (_NEW_DATA_) {
-	var isTblItemLoaded = false;
-	var isTblMarkerMapLoaded = false;
+	// var isTblItemLoaded = false;
+	// var isTblMarkerMapLoaded = false;
 
 	// Load DB master table [item]
-	$.get("data/item.json", function(data) {
-		dbItem.insert(JSON.parse(data));
-
-		// dbItem.data = JSON.parse(data);
-
-		isTblItemLoaded = true;
-	}, 'text');
+	// $.get("data/item.json", function(data) {
+	// 	dbItem.insert(JSON.parse(data));
+	//
+	// 	// dbItem.data = JSON.parse(data);
+	//
+	// 	isTblItemLoaded = true;
+	// }, 'text');
 
 	// Load DB table [marker_<map>]
+	// $.get("data/marker_" + mapName + ".json", function(data) {
+	// 	dbMarker.insert(JSON.parse(data));
+	//
+	// 	// dbMarker.data = JSON.parse(data);
+	//
+	// 	isTblMarkerMapLoaded = true;
+	// }, 'text');
+
+	$.get("data/p.json", function(data) {
+		collP.insert(JSON.parse(data));
+		isPLoaded = true;
+	}, 'text');
+
+	$.get("data/desc-p.json", function(data) {
+		collDescP.insert(JSON.parse(data));
+		isDescPLoaded = true;
+	}, 'text');
+
+	$.get("data/group.json", function(data) {
+		collGroup.insert(JSON.parse(data));
+		isGroupLoaded = true;
+	}, 'text');
+
+	$.get("data/group-desc-p.json", function(data) {
+		collGroupDescP.insert(JSON.parse(data));
+		isGroupDescPLoaded = true;
+	}, 'text');
+
+	$.get("data/main-group.json", function(data) {
+		collMainGroup.insert(JSON.parse(data));
+		isMainGroupLoaded = true;
+	}, 'text');
+
 	$.get("data/marker_" + mapName + ".json", function(data) {
-		dbMarker.insert(JSON.parse(data));
-
-		// dbMarker.data = JSON.parse(data);
-
-		isTblMarkerMapLoaded = true;
+		collMapMarker.insert(JSON.parse(data));
+		isMapMarkerLoaded = true;
 	}, 'text');
 } else {
 	// Load whole database from remote server
 	$.get("data/map_" + mapName + ".json", function(data) {
 		db.loadJSON(data, null);
 
-		dbItem = db.getCollection('item');
-		dbMarker = db.getCollection('marker_' + mapName);
+		// dbItem = db.getCollection('item');
+		// dbMarker = db.getCollection('marker_' + mapName);
 
 		isDataLoaded = true;
 	}, 'text');

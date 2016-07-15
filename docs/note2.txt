@@ -1,0 +1,6 @@
++ disallow edit or delete group on UI
++ choose new group or select existed group
+  + new group: cannot move back to change parent group, must save or cancel, then edit marker again.
++ show group-id + group text in combobox
++ add new groups after main groups, not allow add main groups
++ use combobox with text box, js

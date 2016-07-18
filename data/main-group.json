@@ -2,51 +2,61 @@
   {
     "group-id": 1,
     "name": "poi",
+    "icon": true,
     "order": 1
   },
   {
     "group-id": 2,
     "name": "weapons",
+    "icon": true,
     "order": 2
   },
   {
     "group-id": 3,
     "name": "other",
+    "icon": true,
     "order": 3
   },
   {
     "group-id": 4,
     "name": "sabotage",
+    "icon": true,
     "order": 1
   },
   {
     "group-id": 5,
     "name": "distraction",
+    "icon": true,
     "order": 2
   },
   {
     "group-id": 6,
     "name": "poison",
+    "icon": true,
     "order": 3
   },
   {
     "group-id": 7,
     "name": "blank",
+    "icon": true,
     "order": 4
   },
   {
     "group-id": 8,
     "name": "lethalwea",
+    "icon": true,
     "order": 1
   },
   {
     "group-id": 9,
     "name": "nonlethalwea",
+    "icon": true,
     "order": 2
   },
   {
     "group-id": 10,
     "name": "sab-chandelier",
+    "icon": false,
     "order": 1
   }
 ]

@@ -12,19 +12,18 @@ L.PopupEx = L.Popup.extend({
 		L.Popup.prototype._initLayout.call(this);
 
 		var wrapper = this._wrapper;
-
 		var editContentNode = this._editContentNode = L.DomUtil.create('div','popup-edit-content', wrapper);
 		L.DomEvent.disableScrollPropagation(this._editContentNode);
-
-		var itemContainer = L.DomUtil.create('div', 'popup-item-container', editContentNode);
-        var iconContainer = L.DomUtil.create('div', 'popup-icon-container', editContentNode);
-		var titleContainer = L.DomUtil.create('div', 'popup-title-container', editContentNode);
+		var groupsContainer = L.DomUtil.create('div', 'popup-groups-container', editContentNode);
+		var markerContainer = L.DomUtil.create('div', 'popup-marker-container', editContentNode);
 		var descriptionContainer = L.DomUtil.create('div', 'popup-description-container', editContentNode);
 		var buttonContainer = L.DomUtil.create('div', 'popup-button-container', editContentNode);
 
-		var itemLabel = L.DomUtil.create('span', 'marker-item-label', itemContainer);
-		itemLabel.innerHTML = 'Groups:';
-		var itemInput = this._itemInput = L.DomUtil.create('select', 'marker-item-select', itemContainer);
+		L.DomUtil.create('span', 'marker-group-label', groupsContainer).innerHTML = 'Groups:';
+		this._groupInput = [];
+		for (var i = 0; i < 5; i++) {
+			this._groupInput[i] = L.DomUtil.create('select', 'marker-group-select', groupsContainer);
+		}
 
         // var option;
 		// dbItem.data.forEach(function(rec) {
@@ -37,73 +36,78 @@ L.PopupEx = L.Popup.extend({
         //     itemInput.add(option);
         // });
 
-        var iconLabel = L.DomUtil.create('span', 'marker-icon-label', iconContainer);
-        iconLabel.innerHTML = 'Icon:';
-        var iconInput = this._iconInput = L.DomUtil.create('select', 'marker-icon-select', iconContainer);
-        iconInput.add(new Option('', ''));
-        option = new Option('Sabotage', 'sabotage');
-        option.setAttribute('data-imagesrc', 'img/icons/sabotage.png');
-        iconInput.add(option);
-        option = new Option('Distraction', 'distraction');
-        option.setAttribute('data-imagesrc', 'img/icons/distraction.png');
-        iconInput.add(option);
-        option = new Option('Red Point', 'point_red');
-        option.setAttribute('data-imagesrc', 'img/icons/point_red.png');
-        iconInput.add(option);
+        // var iconLabel = L.DomUtil.create('span', 'marker-icon-label', iconContainer);
+        // iconLabel.innerHTML = 'Icon:';
+        // var iconInput = this._iconInput = L.DomUtil.create('select', 'marker-icon-select', iconContainer);
+        // iconInput.add(new Option('', ''));
+        // option = new Option('Sabotage', 'sabotage');
+        // option.setAttribute('data-imagesrc', 'img/icons/sabotage.png');
+        // iconInput.add(option);
+        // option = new Option('Distraction', 'distraction');
+        // option.setAttribute('data-imagesrc', 'img/icons/distraction.png');
+        // iconInput.add(option);
+        // option = new Option('Red Point', 'point_red');
+        // option.setAttribute('data-imagesrc', 'img/icons/point_red.png');
+        // iconInput.add(option);
 
-		var titleLabel = L.DomUtil.create('span', 'marker-title-label', titleContainer);
-		titleLabel.innerHTML = 'Title:';
-		var titleInput = this._titleInput = L.DomUtil.create('input', 'marker-title-text', titleContainer);
-		titleInput.size = 10;
+        L.DomUtil.create('span', 'marker-qty-label', markerContainer).innerHTML = 'Quantity:';
+        this._qtyInput = L.DomUtil.create('input', 'marker-qty-text', markerContainer);
+		this._qtyInput.size = 2;
 
-        var qtyLabel = L.DomUtil.create('span', 'marker-qty-label', titleContainer);
-        qtyLabel.innerHTML = '&nbsp;Quantity:';
-        var qtyInput = this._qtyInput = L.DomUtil.create('input', 'marker-qty-text', titleContainer);
-        qtyInput.size = 2;
+		L.DomUtil.create('span', 'marker-icon-label', markerContainer).innerHTML = 'Icon:';
+		this._iconCheck = L.DomUtil.create('input', 'marker-icon-check', markerContainer);
+		this._iconCheck.type = 'checkbox';
 
-		var descriptionLabel = L.DomUtil.create('span', 'marker-description-label', descriptionContainer);
-		descriptionLabel.innerHTML = 'Description:';
-		var descriptionInput = this._descriptionInput = L.DomUtil.create('input', 'marker-description-text', descriptionContainer);
+		L.DomUtil.create('span', 'marker-x-label', markerContainer).innerHTML = 'x:';
+		this._xValue = L.DomUtil.create('span', 'marker-x-text', markerContainer);
+		L.DomUtil.create('span', 'marker-y-label', markerContainer).innerHTML = 'y:';
+		this._yValue = L.DomUtil.create('span', 'marker-y-text', markerContainer);
+
+		L.DomUtil.create('span', 'marker-description-label', descriptionContainer).innerHTML = 'Description:';
+		this._descCheck = L.DomUtil.create('input', 'marker-desc-check', descriptionContainer);
+		this._descCheck.type = 'checkbox';
+		// var descriptionInput = this._descriptionInput = L.DomUtil.create('input', 'marker-description-text', descriptionContainer);
 		// descriptionInput.style.height = '100px';
 		// descriptionInput.style.width = '290px';
 
-        var imgLabel = L.DomUtil.create('span', 'marker-img-label', descriptionContainer);
-        imgLabel.innerHTML = '<br>&nbsp;&nbsp;img:';
-        var imgInput = this._imgInput = L.DomUtil.create('input', 'marker-img-text', descriptionContainer);
+        L.DomUtil.create('span', 'marker-img-label', descriptionContainer).innerHTML = '<br>&nbsp;&nbsp;img:';
+        this._imgInput = L.DomUtil.create('input', 'marker-img-text', descriptionContainer);
 
-        var h2Label = L.DomUtil.create('span', 'marker-h2-label', descriptionContainer);
-        h2Label.innerHTML = '<br>&nbsp;&nbsp;H2:';
-        var h2Input = this._h2Input = L.DomUtil.create('input', 'marker-h2-text', descriptionContainer);
+        L.DomUtil.create('span', 'marker-h2-label', descriptionContainer).innerHTML = '<br>&nbsp;&nbsp;h2:';
+        this._h2Input = L.DomUtil.create('input', 'marker-h2-text', descriptionContainer);
 
-        var h1Label = L.DomUtil.create('span', 'marker-h1-label', descriptionContainer);
-        h1Label.innerHTML = '<br>&nbsp;&nbsp;H1:';
-        var h1Input = this._h1Input = L.DomUtil.create('input', 'marker-h1-text', descriptionContainer);
+        L.DomUtil.create('span', 'marker-h1-label', descriptionContainer).innerHTML = '<br>&nbsp;&nbsp;h1:';
+        this._h1Input = L.DomUtil.create('input', 'marker-h1-text', descriptionContainer);
 
-        var p1Label = L.DomUtil.create('span', 'marker-p1-label', descriptionContainer);
-        p1Label.innerHTML = '<br>&nbsp;&nbsp;p1:';
-        var p1Input = this._p1Input = L.DomUtil.create('input', 'marker-p1-text', descriptionContainer);
-
-        var p2Label = L.DomUtil.create('span', 'marker-p2-label', descriptionContainer);
-        p2Label.innerHTML = '<br>&nbsp;&nbsp;p2:';
-        var p2Input = this._p2Input = L.DomUtil.create('input', 'marker-p2-text', descriptionContainer);
-
-        L.DomUtil.create('span', '', descriptionContainer).innerHTML = '<br>&nbsp;';
-
-        L.DomUtil.create('span', '', buttonContainer).innerHTML = '&nbsp;&nbsp;';
+		var pClass = [];
+		var pText = [];
+		this._pClass = [];
+		this._pText = [];
+		for (var i = 0; i < 9; i++) {
+			var pContainer = L.DomUtil.create('span', 'popup-p-container', descriptionContainer);
+			L.DomUtil.create('span', 'marker-p-label', pContainer).innerHTML = '<br>&nbsp;&nbsp;p ' + (i+1) + ':';
+			pClass[i] = this._pClass[i] = L.DomUtil.create('select', 'marker-p-select', pContainer);
+			pText[i] = this._pText[i] = L.DomUtil.create('input', 'marker-p-text', pContainer);
+			pText[i].size = 18;
+			var option;
+			collP.data.forEach(function(rec) {
+			    option = new Option(rec.class, rec.class);
+				pClass[i].add(option);
+			});
+			$(pContainer).hide();
+		}
 
 		var saveButton = L.DomUtil.create('button', 'popup-save-button', buttonContainer);
 		saveButton.innerHTML = 'Save';
 		L.DomEvent.disableClickPropagation(saveButton);
 		L.DomEvent.on(saveButton, 'click', this._onSaveButtonClick, this);
-
         L.DomUtil.create('span', '', buttonContainer).innerHTML = '&nbsp;&nbsp;';
 
 		var cancelButton = L.DomUtil.create('button', 'popup-cancel-button', buttonContainer);
 		cancelButton.innerHTML = 'Cancel';
 		L.DomEvent.disableClickPropagation(cancelButton);
 		L.DomEvent.on(cancelButton, 'click', this._onCancelButtonClick, this);
-
-        L.DomUtil.create('span', '', buttonContainer).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+		L.DomUtil.create('span', '', buttonContainer).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 
 		var deleteButton = this._deleteButton = L.DomUtil.create('button', 'popup-delete-button', buttonContainer);
 		deleteButton.innerHTML = 'Delete';
@@ -115,12 +119,44 @@ L.PopupEx = L.Popup.extend({
 		var marker = this._source;
 
 		if (isEditMode) {
-			this._itemInput.value = marker._item;
-            this._iconInput.value = marker._iconName;
-			this._titleInput.value = marker._title;
-			this._descriptionInput.value = marker._description;
+			this._qtyInput.value = marker._quantity;
+			this._iconCheck.checked = marker._iconId;
+			this._descCheck.checked = marker._desc;
+			this._xValue.innerHTML = marker.getLatLng().lng;
+			this._yValue.innerHTML = marker.getLatLng().lat;
+
+			this._imgInput.value = marker._descImg;
+			this._h2Input.value = marker._descH2;
+			this._h1Input.value = marker._descH1;
 		} else {
-			this._contentNode.innerHTML = marker._description;
+			var descImg = "";
+			var descH2 = "";
+			var descH1 = "";
+			var ps = "";
+
+			if (marker._descImg) {
+				descImg = "<img src='img/map_" + mapName + "/screenshots/" + marker._descImg + "'>";
+			}
+
+			if (marker._descH2) {
+				descH2 = marker._descH2;
+			} else {
+				descH2 = marker._texts[1];
+			}
+			descH2 = "<h2>" + descH2 + "</h2>";
+
+			if (marker._descH1) {
+				descH1 = marker._descH1;
+			} else {
+				descH1 = marker._texts[0];
+			}
+			descH1 = "<h1>" + descH1 + "</h1>";
+
+			for (var i = 0; i < marker._descPClasses.length; i++) {
+				ps += "<p class='" + marker._descPClasses[i] + "'>" + marker._descPTexts[i] + "</p>";
+			}
+
+			this._contentNode.innerHTML = descImg + descH2 + descH1 + ps;
 		}
 
 		this.fire('contentupdate');
@@ -261,26 +297,103 @@ L.Handler.MarkerDragEx = L.Handler.MarkerDrag.extend({
 });
 
 L.MarkerEx = L.Marker.extend({
-	initialize: function (id, level, x, y, item, icon, title, description, options) {
+	initialize: function (id, level, x, y, groupId, iconId, quantity, options) {
 		L.Marker.prototype.initialize.call(this, L.latLng(y, x), options);
 
 		this._id = id;
 		this._level = level;
-		this._item = item;
-        this._iconName = icon;
-		this._title = title;
-		this._description = description;
+		this._groupId = groupId;
+		this._iconId = iconId;
+		this._quantity = quantity;
 
-        var iconName = this._item;
-        if (this._iconName) {
-            iconName = this._iconName;
-        }
+		var iconName;
+		var mainGroupName = '';
+		this._texts = [];
+		this._text = '';
+		this._desc = -1;
+		this._descImg = '';
+		this._descH2 = '';
+		this._descH1 = '';
+		this._descPClasses = [];
+		this._descPTexts = [];
+		var label;
+		var group;
 
-		this.options.icon = new L.IconEx({iconUrl: "img/icons/" + iconName + ".png"});
-		this.options.alt = 'level' + this._level + this._item;
+		var lGroupId = this._groupId;
+		var lGroup;
+		var lMainGroup;
+		var lIsIconNameGot = false;
 
-		if (title) {
-			this.bindLabel(title);
+		for (var i = 0; ; i++) {
+			if (!lIsIconNameGot) {
+				lMainGroup = collMainGroup.findOne({'group-id': lGroupId});
+				if (lMainGroup) {
+					if (mainGroupName === '') {
+						mainGroupName = lMainGroup.name;
+						iconName = mainGroupName;
+					}
+					if (lMainGroup.name && lMainGroup.icon) {
+						iconName = lMainGroup.name;
+						lIsIconNameGot = true;
+					}
+				}
+			}
+
+			lGroup = collGroup.get(lGroupId);
+			if (!group) {
+				group = lGroup;
+			}
+			if (lGroup == null) {
+				break;
+			}
+			this._texts[i] = lGroup['text'];
+			if (!this._text) {
+				this._text = lGroup['text'];
+			}
+			if (this._desc === -1) {
+				this._desc = lGroup['desc'];
+			}
+			if (!this._descImg) {
+				this._descImg = lGroup['desc-img'];
+			}
+			if (!this._descH2) {
+				this._descH2 = lGroup['desc-h2'];
+			}
+			if (!this._descH1) {
+				this._descH1 = lGroup['desc-h1'];
+			}
+			lGroupId = lGroup['parent-id'];
+			if (lGroupId == 0) {
+				break;
+			}
+		}
+		var joinDescP = collGroupDescP.eqJoin([group], 'group-id', '$loki');
+		var idx = 0;
+		for (var i = 0; i < joinDescP.data().length; i++) {
+			if (Object.keys(joinDescP.data()[i].right).length) {
+				var descP = collDescP.get(joinDescP.data()[i].left['$loki']);
+				var p = collP.get(descP['p-id']);
+				this._descPClasses[idx] = p['class'];
+				this._descPTexts[idx] = descP['text'];
+				idx++;
+			}
+		}
+
+		if (this._iconId === 1) {
+			iconName = 'point_red';
+		}
+
+		this.options.icon = new L.IconEx({iconUrl: 'img/icons/' + iconName + '.png'});
+		this.options.alt = 'level' + this._level + mainGroupName;
+
+		if (!label) {
+			label = this._text;
+		}
+		if (label) {
+			if (this._quantity) {
+				label = label + ' (x' + this._quantity + ')';
+			}
+			this.bindLabel(label);
 		}
 
 		this.bindPopup(new L.PopupEx());
@@ -327,8 +440,8 @@ L.MarkerEx = L.Marker.extend({
     },
 
 	openPopup: function () {
-		// prevent open popup when _description is empty
-		if (!isEditMode && !this._description) {
+		// prevent open popup
+		if (!isEditMode && !this._desc) {
 			return;
 		}
 
@@ -397,6 +510,7 @@ function processMap() {
 	if (_NEW_DATA_) {
 		// if (isTblItemLoaded && isTblMarkerMapLoaded) {
 		if (isPLoaded && isDescPLoaded && isGroupLoaded && isGroupDescPLoaded && isMainGroupLoaded && isMapMarkerLoaded ) {
+			console.log(db);
 		    isDataLoaded = true;
 		}
 	}
@@ -407,6 +521,10 @@ function processMap() {
 		// dbMarker.data.forEach(function(rec) {
         //     allMarkers.addLayer(new L.MarkerEx(rec.$loki, rec.level, rec.x, rec.y, rec.item, rec.icon, rec.title, rec.description));
         // });
+		collMapMarker.data.forEach(function(rec) {
+			allMarkers.addLayer(new L.MarkerEx(rec['$loki'], rec['level'], rec['x'], rec['y'], rec['group-id'], rec['icon-id'], rec['quantity']));
+		});
+
         window[openedMap].addLayer(allMarkers);
 
 		// Current level of map

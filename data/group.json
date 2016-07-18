@@ -2,7 +2,7 @@
   {
     "parent-id": 0,
     "text": "Points of Interest",
-    "title": "",
+    "desc": 1,
     "desc-img": "",
     "desc-h2": "",
     "desc-h1": ""
@@ -10,7 +10,7 @@
   {
     "parent-id": 0,
     "text": "Weapons and Tools",
-    "title": "",
+    "desc": 1,
     "desc-img": "",
     "desc-h2": "",
     "desc-h1": ""
@@ -18,7 +18,7 @@
   {
     "parent-id": 0,
     "text": "Navigation",
-    "title": "",
+    "desc": 1,
     "desc-img": "",
     "desc-h2": "",
     "desc-h1": ""
@@ -26,7 +26,7 @@
   {
     "parent-id": 1,
     "text": "Sabotage",
-    "title": "",
+    "desc": 1,
     "desc-img": "",
     "desc-h2": "",
     "desc-h1": ""
@@ -34,7 +34,7 @@
   {
     "parent-id": 1,
     "text": "Distraction",
-    "title": "",
+    "desc": 1,
     "desc-img": "",
     "desc-h2": "",
     "desc-h1": ""
@@ -42,7 +42,7 @@
   {
     "parent-id": 1,
     "text": "Poison",
-    "title": "",
+    "desc": 1,
     "desc-img": "",
     "desc-h2": "",
     "desc-h1": ""
@@ -50,7 +50,7 @@
   {
     "parent-id": 1,
     "text": "note",
-    "title": "",
+    "desc": 1,
     "desc-img": "",
     "desc-h2": "",
     "desc-h1": ""
@@ -58,7 +58,7 @@
   {
     "parent-id": 2,
     "text": "Lethal Melee",
-    "title": "",
+    "desc": 1,
     "desc-img": "",
     "desc-h2": "",
     "desc-h1": ""
@@ -66,7 +66,7 @@
   {
     "parent-id": 2,
     "text": "Non-lethal Melee",
-    "title": "",
+    "desc": 1,
     "desc-img": "",
     "desc-h2": "",
     "desc-h1": ""
@@ -74,7 +74,7 @@
   {
     "parent-id": 4,
     "text": "Chandelier",
-    "title": "",
+    "desc": 1,
     "desc-img": "",
     "desc-h2": "",
     "desc-h1": ""

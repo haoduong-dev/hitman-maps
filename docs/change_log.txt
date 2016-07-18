@@ -6,6 +6,9 @@ Hitman Maps
 CHANGE LOG
 --------------------------------------------------------------------------------
 
+*** GUIDE ***
++ Clear local DB: use Browser feature (eg. Chrome)
+
 *** WARNING (limitations) ***
 + When reload/refresh page (eg. press F5), page will reload DB from remote server.
    Local DB will be removed (If you did not download DB, you will lost all updated data).

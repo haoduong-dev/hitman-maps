@@ -20,9 +20,9 @@ L.PopupEx = L.Popup.extend({
 		var buttonContainer = L.DomUtil.create('div', 'popup-button-container', editContentNode);
 
 		L.DomUtil.create('span', 'marker-group-label', groupsContainer).innerHTML = 'Groups:';
-		this._groupInput = [];
+		this._groupInputs = [];
 		for (var i = 0; i < 5; i++) {
-			this._groupInput[i] = L.DomUtil.create('select', 'marker-group-select', groupsContainer);
+			this._groupInputs[i] = L.DomUtil.create('select', 'marker-group-select', groupsContainer);
 		}
 
         // var option;
@@ -36,39 +36,25 @@ L.PopupEx = L.Popup.extend({
         //     itemInput.add(option);
         // });
 
-        // var iconLabel = L.DomUtil.create('span', 'marker-icon-label', iconContainer);
-        // iconLabel.innerHTML = 'Icon:';
-        // var iconInput = this._iconInput = L.DomUtil.create('select', 'marker-icon-select', iconContainer);
-        // iconInput.add(new Option('', ''));
-        // option = new Option('Sabotage', 'sabotage');
-        // option.setAttribute('data-imagesrc', 'img/icons/sabotage.png');
-        // iconInput.add(option);
-        // option = new Option('Distraction', 'distraction');
-        // option.setAttribute('data-imagesrc', 'img/icons/distraction.png');
-        // iconInput.add(option);
-        // option = new Option('Red Point', 'point_red');
-        // option.setAttribute('data-imagesrc', 'img/icons/point_red.png');
-        // iconInput.add(option);
-
         L.DomUtil.create('span', 'marker-qty-label', markerContainer).innerHTML = 'Quantity:';
         this._qtyInput = L.DomUtil.create('input', 'marker-qty-text', markerContainer);
 		this._qtyInput.size = 2;
 
-		L.DomUtil.create('span', 'marker-icon-label', markerContainer).innerHTML = 'Icon:';
+		L.DomUtil.create('span', 'marker-icon-label', markerContainer).innerHTML = 'Red point:';
 		this._iconCheck = L.DomUtil.create('input', 'marker-icon-check', markerContainer);
 		this._iconCheck.type = 'checkbox';
 
-		L.DomUtil.create('span', 'marker-x-label', markerContainer).innerHTML = 'x:';
-		this._xValue = L.DomUtil.create('span', 'marker-x-text', markerContainer);
-		L.DomUtil.create('span', 'marker-y-label', markerContainer).innerHTML = 'y:';
-		this._yValue = L.DomUtil.create('span', 'marker-y-text', markerContainer);
-
-		L.DomUtil.create('span', 'marker-description-label', descriptionContainer).innerHTML = 'Description:';
+		L.DomUtil.create('span', 'marker-description-label', descriptionContainer).innerHTML = 'Show popup:';
 		this._descCheck = L.DomUtil.create('input', 'marker-desc-check', descriptionContainer);
 		this._descCheck.type = 'checkbox';
 		// var descriptionInput = this._descriptionInput = L.DomUtil.create('input', 'marker-description-text', descriptionContainer);
 		// descriptionInput.style.height = '100px';
 		// descriptionInput.style.width = '290px';
+
+		L.DomUtil.create('span', 'marker-x-label', descriptionContainer).innerHTML = 'x:';
+		this._xValue = L.DomUtil.create('span', 'marker-x-text', descriptionContainer);
+		L.DomUtil.create('span', 'marker-y-label', descriptionContainer).innerHTML = '&nbsp;y:';
+		this._yValue = L.DomUtil.create('span', 'marker-y-text', descriptionContainer);
 
         L.DomUtil.create('span', 'marker-img-label', descriptionContainer).innerHTML = '<br>&nbsp;&nbsp;img:';
         this._imgInput = L.DomUtil.create('input', 'marker-img-text', descriptionContainer);
@@ -79,22 +65,23 @@ L.PopupEx = L.Popup.extend({
         L.DomUtil.create('span', 'marker-h1-label', descriptionContainer).innerHTML = '<br>&nbsp;&nbsp;h1:';
         this._h1Input = L.DomUtil.create('input', 'marker-h1-text', descriptionContainer);
 
-		var pClass = [];
-		var pText = [];
-		this._pClass = [];
-		this._pText = [];
+		var pClasses = [];
+		var pTexts = [];
+		this._pContainers = [];
+		this._pClasses = [];
+		this._pTexts = [];
 		for (var i = 0; i < 9; i++) {
-			var pContainer = L.DomUtil.create('span', 'popup-p-container', descriptionContainer);
-			L.DomUtil.create('span', 'marker-p-label', pContainer).innerHTML = '<br>&nbsp;&nbsp;p ' + (i+1) + ':';
-			pClass[i] = this._pClass[i] = L.DomUtil.create('select', 'marker-p-select', pContainer);
-			pText[i] = this._pText[i] = L.DomUtil.create('input', 'marker-p-text', pContainer);
-			pText[i].size = 18;
+			this._pContainers[i] = L.DomUtil.create('span', 'popup-p-container', descriptionContainer);
+			L.DomUtil.create('span', 'marker-p-label', this._pContainers[i]).innerHTML = '<br>&nbsp;&nbsp;p ' + (i+1) + ':';
+			pClasses[i] = this._pClasses[i] = L.DomUtil.create('select', 'marker-p-select', this._pContainers[i]);
+			pTexts[i] = this._pTexts[i] = L.DomUtil.create('input', 'marker-p-text', this._pContainers[i]);
+			pTexts[i].size = 18;
 			var option;
 			collP.data.forEach(function(rec) {
 			    option = new Option(rec.class, rec.class);
-				pClass[i].add(option);
+				pClasses[i].add(option);
 			});
-			$(pContainer).hide();
+			$(this._pContainers[i]).hide();
 		}
 
 		var saveButton = L.DomUtil.create('button', 'popup-save-button', buttonContainer);
@@ -119,6 +106,21 @@ L.PopupEx = L.Popup.extend({
 		var marker = this._source;
 
 		if (isEditMode) {
+			var groupInputs = this._groupInputs;
+			for (var i = 0; i < marker._groupIds.length; i++) {
+				var parentId = 0;
+				if (i > 0) {
+					parentId = marker._groupIds[marker._groupIds.length - i];
+				}
+				var groupParent = collGroup.chain().find({'parent-id': parentId}).simplesort('$loki').data();
+				groupInputs[i].add(new Option('(add new...)', 0));
+				groupParent.forEach(function(rec) {
+					var option = new Option(rec['text'], rec['$loki']);
+					groupInputs[i].add(option);
+				});
+				groupInputs[i].value = marker._groupIds[marker._groupIds.length - i - 1];
+			}
+
 			this._qtyInput.value = marker._quantity;
 			this._iconCheck.checked = marker._iconId;
 			this._descCheck.checked = marker._desc;
@@ -128,6 +130,12 @@ L.PopupEx = L.Popup.extend({
 			this._imgInput.value = marker._descImg;
 			this._h2Input.value = marker._descH2;
 			this._h1Input.value = marker._descH1;
+
+			for (var i = 0; i < marker._descPClasses.length; i++) {
+				this._pClasses[i].value = marker._descPClasses[i];
+				this._pTexts[i].value = marker._descPTexts[i];
+				$(this._pContainers[i]).show();
+			}
 		} else {
 			var descImg = "";
 			var descH2 = "";
@@ -308,6 +316,7 @@ L.MarkerEx = L.Marker.extend({
 
 		var iconName;
 		var mainGroupName = '';
+		this._groupIds = [];
 		this._texts = [];
 		this._text = '';
 		this._desc = -1;
@@ -346,6 +355,7 @@ L.MarkerEx = L.Marker.extend({
 			if (lGroup == null) {
 				break;
 			}
+			this._groupIds[i] = lGroup['$loki'];
 			this._texts[i] = lGroup['text'];
 			if (!this._text) {
 				this._text = lGroup['text'];
@@ -385,6 +395,7 @@ L.MarkerEx = L.Marker.extend({
 
 		this.options.icon = new L.IconEx({iconUrl: 'img/icons/' + iconName + '.png'});
 		this.options.alt = 'level' + this._level + mainGroupName;
+		this.options.title = this._texts[1] + ': ' + this._texts[0];
 
 		if (!label) {
 			label = this._text;
@@ -530,6 +541,12 @@ function processMap() {
 		// Current level of map
 		window.openedMapID = $(".change-level.active").attr("id").substr(6, 7);
 
+		// Loading
+		// $(window).load(function() {
+		// 	$(".loading-block").fadeOut("slow");
+		// 	$("body").css("display", "block");
+		// });
+
 		// SideBar show/hide
 		$("#sidebar-hide").click(function() {
 			if ($("#sidebar").hasClass("hidden")) {
@@ -543,17 +560,17 @@ function processMap() {
             }
 		});
 
-		// Load icons for all category items
+		// Sidebar icons
 		$(".marker-category li").each(function() {
-			var a = $(this).attr("id").substr(2);
-            if (!a.startsWith("sab-") && !a.startsWith("dis-")) {
-                $(this).css("background", "url('img/icons/" + a + ".png') no-repeat left");
-            }
+			var itemId = $(this).attr('id').substr(2);
+			if (!itemId.startsWith("sab-") && !itemId.startsWith("dis-")) {
+				$(this).css("background", "url('img/icons/" + itemId + ".png') no-repeat left");
+			}
 		});
 
 		// SearchBar dropdown: select
 		$("#searchbar").chosen({
-			allow_single_deselect: !0
+			allow_single_deselect: true
 		});
 
 		// SearchBar dropdown: input

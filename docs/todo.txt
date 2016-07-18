@@ -32,7 +32,7 @@ NORMAL
 LOW
 + change design/layout for some parts in EDIT mode -Hao >Winterbirds
 + adjust css for mobile layout -Hao >Winterbirds
-
++ set decimal point for x and y to 2. Ex: -20.64
 --------------------------------------------------------------------------------
 WISH LIST
 --------------------------------------------------------------------------------

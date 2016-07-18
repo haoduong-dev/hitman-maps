@@ -6,5 +6,5 @@ JSON
 myCollectionObject.insert(JSON.parse(json).myCollection);
 
 
-max group = 5
+max group = 5 or 6
 max desc p = 9

@@ -1,7 +1,11 @@
 
 var urlMainRef = "http://www.hitmanmaps.com/";
+var mapName = "paris";
 
 var lmap = L.map('lmap').setView([63.074865690586634, -29.53125], 4);
+lmap.zoomControl.setPosition('topright');
+lmap.setMaxBounds([[-40.71, -215.50],[86.34, 144.66]]);
+$("#level-1").addClass("active");
 
 var tileLevels = L.layerGroup([
 	mapLevel0base = L.tileLayer(urlMainRef + 'img/map_paris/lvl_0/base/{z}/{x}/{y}.png', { noWrap: true, minZoom: 3, maxZoom: 5 }),
@@ -66,14 +70,6 @@ var tileLevels = L.layerGroup([
 ]);
 
 mapLevel1base.addTo(lmap);
-
-lmap.zoomControl.setPosition('topright');
-lmap.setMaxBounds([[-40.71, -215.50],[86.34, 144.66]]);
-
-// Active map
-$("#level-1").addClass("active");
-
-var mapName = "paris";
 
 // limitations: add data follow old method for polyline, polygon
 var allMarkers = L.layerGroup([

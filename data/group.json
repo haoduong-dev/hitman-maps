@@ -78,5 +78,21 @@
     "desc-img": "item_rig.jpg",
     "desc-h2": "",
     "desc-h1": "Chandelier custom"
+  },
+  {
+    "parent-id": 10,
+    "text": "Chandelier child 1",
+    "desc": 1,
+    "desc-img": "disg_crew.jpg",
+    "desc-h2": "",
+    "desc-h1": ""
+  },
+  {
+    "parent-id": 10,
+    "text": "Chandelier child 2",
+    "desc": 0,
+    "desc-img": "",
+    "desc-h2": "",
+    "desc-h1": ""
   }
 ]

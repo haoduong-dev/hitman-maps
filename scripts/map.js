@@ -23,7 +23,19 @@ L.PopupEx = L.Popup.extend({
 		this._groupInputs = [];
 		for (var i = 0; i < 5; i++) {
 			this._groupInputs[i] = L.DomUtil.create('select', 'marker-group-select', groupsContainer);
+			this._groupInputs[i].add(new Option('', 0));
+			this._groupInputs[i].add(new Option('(add new...)', -1));
 		}
+
+		// TODO onchange for Groups select
+		// when change 1 Group
+		//   update all child Group
+		//   confirm "keep Popup info or not" (in case changed Popup content only)
+		//     if not keep (or not yet changed Popup content), load new info for Popup
+		//     if keep, save new Popup info with same Group text (Group ID are diff)
+		// when change 1 Group to Add new..., change to text box, save new Group
+		// in Add new (text box), clear text box, back to Group select
+
 
         // var option;
 		// dbItem.data.forEach(function(rec) {
@@ -36,25 +48,29 @@ L.PopupEx = L.Popup.extend({
         //     itemInput.add(option);
         // });
 
-        L.DomUtil.create('span', 'marker-qty-label', markerContainer).innerHTML = 'Quantity:';
+		L.DomUtil.create('span', 'marker-marker-label', markerContainer).innerHTML = 'Marker:';
+
+		L.DomUtil.create('span', 'marker-x-label', markerContainer).innerHTML = '&nbsp;&nbsp;x:';
+		this._xValue = L.DomUtil.create('span', 'marker-x-text', markerContainer);
+		L.DomUtil.create('span', 'marker-y-label', markerContainer).innerHTML = '&nbsp;&nbsp;y:';
+		this._yValue = L.DomUtil.create('span', 'marker-y-text', markerContainer);
+
+        L.DomUtil.create('span', 'marker-qty-label', markerContainer).innerHTML = '<br>&nbsp;&nbsp;Quantity:';
         this._qtyInput = L.DomUtil.create('input', 'marker-qty-text', markerContainer);
 		this._qtyInput.size = 2;
 
-		L.DomUtil.create('span', 'marker-icon-label', markerContainer).innerHTML = 'Red point:';
+		L.DomUtil.create('span', 'marker-icon-label', markerContainer).innerHTML = '&nbsp;&nbsp;Red point:';
 		this._iconCheck = L.DomUtil.create('input', 'marker-icon-check', markerContainer);
 		this._iconCheck.type = 'checkbox';
 
-		L.DomUtil.create('span', 'marker-description-label', descriptionContainer).innerHTML = 'Show popup:';
+		L.DomUtil.create('span', 'marker-popup-label', descriptionContainer).innerHTML = 'Popup:';
+		L.DomUtil.create('span', 'marker-showpopup-label', descriptionContainer).innerHTML = '<br>&nbsp;&nbsp;Show:';
 		this._descCheck = L.DomUtil.create('input', 'marker-desc-check', descriptionContainer);
 		this._descCheck.type = 'checkbox';
+
 		// var descriptionInput = this._descriptionInput = L.DomUtil.create('input', 'marker-description-text', descriptionContainer);
 		// descriptionInput.style.height = '100px';
 		// descriptionInput.style.width = '290px';
-
-		L.DomUtil.create('span', 'marker-x-label', descriptionContainer).innerHTML = 'x:';
-		this._xValue = L.DomUtil.create('span', 'marker-x-text', descriptionContainer);
-		L.DomUtil.create('span', 'marker-y-label', descriptionContainer).innerHTML = '&nbsp;y:';
-		this._yValue = L.DomUtil.create('span', 'marker-y-text', descriptionContainer);
 
         L.DomUtil.create('span', 'marker-img-label', descriptionContainer).innerHTML = '<br>&nbsp;&nbsp;img:';
         this._imgInput = L.DomUtil.create('input', 'marker-img-text', descriptionContainer);
@@ -84,6 +100,10 @@ L.PopupEx = L.Popup.extend({
 			$(this._pContainers[i]).hide();
 		}
 
+		// TODO process p 1, p 2, ... select
+
+		// TODO (low priority) check unique keys in marker_<map> collection: level, x, y
+
 		var saveButton = L.DomUtil.create('button', 'popup-save-button', buttonContainer);
 		saveButton.innerHTML = 'Save';
 		L.DomEvent.disableClickPropagation(saveButton);
@@ -107,18 +127,25 @@ L.PopupEx = L.Popup.extend({
 
 		if (isEditMode) {
 			var groupInputs = this._groupInputs;
-			for (var i = 0; i < marker._groupIds.length; i++) {
-				var parentId = 0;
-				if (i > 0) {
-					parentId = marker._groupIds[marker._groupIds.length - i];
+			for (var i = 0; i <= marker._groupIds.length; i++) {
+				var findGroupId;
+				if (i == 0) {
+					findGroupId = 0;
+				} else if (i == marker._groupIds.length) {
+					findGroupId = marker._groupIds[0];
+				} else {
+					findGroupId = marker._groupIds[marker._groupIds.length - i];
 				}
-				var groupParent = collGroup.chain().find({'parent-id': parentId}).simplesort('$loki').data();
-				groupInputs[i].add(new Option('(add new...)', 0));
-				groupParent.forEach(function(rec) {
+
+				var groupList = collGroup.chain().find({'parent-id': findGroupId}).simplesort('$loki').data();
+				groupList.forEach(function(rec) {
 					var option = new Option(rec['text'], rec['$loki']);
 					groupInputs[i].add(option);
 				});
-				groupInputs[i].value = marker._groupIds[marker._groupIds.length - i - 1];
+
+				if (i < marker._groupIds.length) {
+					groupInputs[i].value = marker._groupIds[marker._groupIds.length - i - 1];
+				}
 			}
 
 			this._qtyInput.value = marker._quantity;
@@ -318,7 +345,6 @@ L.MarkerEx = L.Marker.extend({
 		var mainGroupName = '';
 		this._groupIds = [];
 		this._texts = [];
-		this._text = '';
 		this._desc = -1;
 		this._descImg = '';
 		this._descH2 = '';
@@ -349,34 +375,30 @@ L.MarkerEx = L.Marker.extend({
 			}
 
 			lGroup = collGroup.get(lGroupId);
-			if (!group) {
-				group = lGroup;
-			}
 			if (lGroup == null) {
 				break;
 			}
+
 			this._groupIds[i] = lGroup['$loki'];
 			this._texts[i] = lGroup['text'];
-			if (!this._text) {
-				this._text = lGroup['text'];
-			}
-			if (this._desc === -1) {
+
+			if (i == 0) {
+				group = lGroup;
 				this._desc = lGroup['desc'];
-			}
-			if (!this._descImg) {
 				this._descImg = lGroup['desc-img'];
-			}
-			if (!this._descH2) {
 				this._descH2 = lGroup['desc-h2'];
-			}
-			if (!this._descH1) {
 				this._descH1 = lGroup['desc-h1'];
 			}
+
 			lGroupId = lGroup['parent-id'];
 			if (lGroupId == 0) {
 				break;
 			}
 		}
+		if (!group) {
+			// ERROR
+		}
+
 		var joinDescP = collGroupDescP.eqJoin([group], 'group-id', '$loki');
 		var idx = 0;
 		for (var i = 0; i < joinDescP.data().length; i++) {
@@ -397,12 +419,10 @@ L.MarkerEx = L.Marker.extend({
 		this.options.alt = 'level' + this._level + mainGroupName;
 		this.options.title = this._texts[1] + ': ' + this._texts[0];
 
-		if (!label) {
-			label = this._text;
-		}
+		label = this._texts[0];
 		if (label) {
 			if (this._quantity) {
-				label = label + ' (x' + this._quantity + ')';
+				label += ' (x' + this._quantity + ')';
 			}
 			this.bindLabel(label);
 		}

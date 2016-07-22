@@ -22,17 +22,20 @@ L.PopupEx = L.Popup.extend({
 		L.DomUtil.create('span', 'marker-group-label', groupsContainer).innerHTML = 'Groups:';
 		this._groupInputs = [];
 		for (var i = 0; i < 5; i++) {
-			this._groupInputs[i] = L.DomUtil.create('select', 'marker-group-select', groupsContainer);
-			this._groupInputs[i].add(new Option('', 0));
-			this._groupInputs[i].add(new Option('(add new...)', -1));
+			var groupInput = this._groupInputs[i] = L.DomUtil.create('select', 'marker-group-select', groupsContainer);
+			$(groupInput).hide();
+			groupInput.add(new Option('', 0));
+			groupInput.add(new Option('(add new...)', -1));
+			L.DomEvent.on(groupInput, 'change', this._onGroupChanged, this);
 		}
 
 		// TODO onchange for Groups select
 		// when change 1 Group
 		//   update all child Group
 		//   confirm "keep Popup info or not" (in case changed Popup content only)
-		//     if not keep (or not yet changed Popup content), load new info for Popup
+		//     if not keep (or not yet changed Popup content), load new info for  [default]
 		//     if keep, save new Popup info with same Group text (Group ID are diff)
+		//        [if use default, add Undo change Group feature (low priority)]
 		// when change 1 Group to Add new..., change to text box, save new Group
 		// in Add new (text box), clear text box, back to Group select
 
@@ -86,9 +89,11 @@ L.PopupEx = L.Popup.extend({
 		this._pContainers = [];
 		this._pClasses = [];
 		this._pTexts = [];
-		for (var i = 0; i < 9; i++) {
+		for (i = 0; i < 9; i++) {
 			this._pContainers[i] = L.DomUtil.create('span', 'popup-p-container', descriptionContainer);
-			L.DomUtil.create('span', 'marker-p-label', this._pContainers[i]).innerHTML = '<br>&nbsp;&nbsp;p ' + (i+1) + ':';
+			L.DomUtil.create('span', 'marker-blank-label', this._pContainers[i]).innerHTML = '<br>';
+			L.DomUtil.create('span', 'marker-remove-p-label', this._pContainers[i]).innerHTML = '&nbsp;-&nbsp;';
+			L.DomUtil.create('span', 'marker-p-label', this._pContainers[i]).innerHTML = 'p:';
 			pClasses[i] = this._pClasses[i] = L.DomUtil.create('select', 'marker-p-select', this._pContainers[i]);
 			pTexts[i] = this._pTexts[i] = L.DomUtil.create('input', 'marker-p-text', this._pContainers[i]);
 			pTexts[i].size = 18;
@@ -99,6 +104,10 @@ L.PopupEx = L.Popup.extend({
 			});
 			$(this._pContainers[i]).hide();
 		}
+		this._newPContainer = L.DomUtil.create('span', 'popup-p-container', descriptionContainer);
+		L.DomUtil.create('span', 'marker-blank-label', this._newPContainer).innerHTML = '<br>';
+		L.DomUtil.create('span', 'marker-add-p-label', this._newPContainer).innerHTML = '&nbsp;+&nbsp;';
+		L.DomUtil.create('span', 'marker-p-label', this._newPContainer).innerHTML = 'p';
 
 		// TODO process p 1, p 2, ... select
 
@@ -120,6 +129,12 @@ L.PopupEx = L.Popup.extend({
 		deleteButton.innerHTML = 'Delete';
 		L.DomEvent.disableClickPropagation(deleteButton);
 		L.DomEvent.on(deleteButton, 'click', this._onDeleteButtonClick, this);
+	},
+
+	_onGroupChanged: function (e) {
+		var groupInput = e.target;
+		groupInput.value = 0;
+		// TODO
 	},
 
 	_updateContent: function () {
@@ -146,6 +161,8 @@ L.PopupEx = L.Popup.extend({
 				if (i < marker._groupIds.length) {
 					groupInputs[i].value = marker._groupIds[marker._groupIds.length - i - 1];
 				}
+
+				$(groupInputs[i]).show();
 			}
 
 			this._qtyInput.value = marker._quantity;
@@ -158,7 +175,7 @@ L.PopupEx = L.Popup.extend({
 			this._h2Input.value = marker._descH2;
 			this._h1Input.value = marker._descH1;
 
-			for (var i = 0; i < marker._descPClasses.length; i++) {
+			for (i = 0; i < marker._descPClasses.length; i++) {
 				this._pClasses[i].value = marker._descPClasses[i];
 				this._pTexts[i].value = marker._descPTexts[i];
 				$(this._pContainers[i]).show();
@@ -187,7 +204,7 @@ L.PopupEx = L.Popup.extend({
 			}
 			descH1 = "<h1>" + descH1 + "</h1>";
 
-			for (var i = 0; i < marker._descPClasses.length; i++) {
+			for (i = 0; i < marker._descPClasses.length; i++) {
 				ps += "<p class='" + marker._descPClasses[i] + "'>" + marker._descPTexts[i] + "</p>";
 			}
 
@@ -401,7 +418,7 @@ L.MarkerEx = L.Marker.extend({
 
 		var joinDescP = collGroupDescP.eqJoin([group], 'group-id', '$loki');
 		var idx = 0;
-		for (var i = 0; i < joinDescP.data().length; i++) {
+		for (i = 0; i < joinDescP.data().length; i++) {
 			if (Object.keys(joinDescP.data()[i].right).length) {
 				var descP = collDescP.get(joinDescP.data()[i].left['$loki']);
 				var p = collP.get(descP['p-id']);
@@ -852,6 +869,7 @@ function processMap() {
 
 $("#download-db").on("mousedown", function() {
 	var blobDb = new Blob([db.serialize()]);
+	//noinspection JSUnresolvedFunction,JSUnresolvedVariable
 	$("#download-db").attr('href', window.URL.createObjectURL(blobDb));
 	$("#download-db").attr('download', 'local_map_' + mapName + '.json');
 });

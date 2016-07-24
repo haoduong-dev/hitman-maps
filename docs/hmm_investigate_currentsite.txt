@@ -1,0 +1,20 @@
+h2: custom (if current group is sub group, use main group)
+h1: custom (if current group is sub group, use main group)
+
+label: change when poison. groupText (poison person)
+label: custom? Blend In group
+label: Security Check group, use main group
+label: case of Firearm, groupParent: group
+
+search: parentGroup: poison person
+search: case of [Weapons and tools], Weapon: <group text>
+search: case of Firearm, Weapon: groupParent group
+
+Enter Point -> Starting Location
+Exit Point -> Exit Location
+
+Starting Location
+Exit Location
+Agency Pickup
+  label: groupParent: group
+  search: groupParent: group

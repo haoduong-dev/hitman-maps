@@ -8,3 +8,8 @@ myCollectionObject.insert(JSON.parse(json).myCollection);
 
 max group = 5 or 6
 max desc p = 9
+
+http://codepen.io/
+http://www.w3schools.com/angular/default.asp
+https://scotch.io/tutorials/how-to-correctly-use-bootstrapjs-and-angularjs-together
+http://angular-ui.github.io/bootstrap/#/getting_started

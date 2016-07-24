@@ -33,5 +33,10 @@
     "class": "item-ammo",
     "text-template": "",
     "text-default": ""
+  },
+  {
+    "class": "item-desc",
+    "text-template": "",
+    "text-default": ""
   }
 ]

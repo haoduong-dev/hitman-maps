@@ -1,4 +1,4 @@
-@import "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800|Open+Sans+Condensed:300,300italic,700&subset=latin,cyrillic";
+@import "https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800|Open+Sans+Condensed:300,300italic,700&subset=latin,cyrillic";
 html,
 body,
 div,
@@ -971,4 +971,12 @@ li.marker-sub {
 }
 .edit {
     display: none;
+}
+.popup-p-button,
+.popup-group-button {
+    cursor: pointer;
+    color: #87CEEB;
+}
+.popup-indent {
+    color: #FFFFFF;
 }

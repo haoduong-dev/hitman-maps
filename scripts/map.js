@@ -40,7 +40,6 @@ L.PopupEx = L.Popup.extend({
 			L.DomEvent.on(groupNew, 'keyup', this._onGroupNewKeyUp, this);
 			L.DomEvent.on(groupNew, 'change', this._onGroupNewChanged, this);
 		}
-		L.DomUtil.create('span', 'popup-group-button ion-checkmark', groupsContainer);
 
         // var option;
 		// dbItem.data.forEach(function(rec) {
@@ -174,20 +173,36 @@ L.PopupEx = L.Popup.extend({
 	_onGroupNewChanged: function (e) {
 	},
 
-	// TODO load p.json for placeholder for text, load desc-p.json for list in text
 	_onPPlusClicked: function () {
 		var count = this._descPContainer.childElementCount;
 		var pContainer = L.DomUtil.create('div', 'popup-p-container', this._descPContainer);
 		var pMinusButtons = L.DomUtil.create('span', 'popup-p-button ion-minus', pContainer);
 		L.DomEvent.on(pMinusButtons, 'click', this._onPMinusClicked, this);
 		L.DomUtil.create('span', 'popup-p-label', pContainer).innerHTML = 'p:';
-		var pClass = L.DomUtil.create('select', 'popup-p-select', pContainer);
+		var pId = L.DomUtil.create('select', 'popup-p-select', pContainer);
 		var pText = L.DomUtil.create('input', 'popup-p-text', pContainer);
 		pText.size = 18;
 		var option;
 		collP.data.forEach(function(rec) {
-			option = new Option(rec.class, rec.class);
-			pClass.add(option);
+			option = new Option(rec['class'], rec['$loki']);
+			pId.add(option);
+		});
+
+		$('.popup-p-text').on('focus', function(){
+			var findPId = parseInt($(this).prev()[0].value, 10);
+			console.log(findPId);
+			$(this).autocomplete({
+				source: function(request, response) {
+					var filteredArray = $.map(collDescP.chain().find({'p-id': findPId}).data(), function(item) {
+						if (item['text'].toLowerCase().startsWith(request.term.toLowerCase())) {
+							return item['text'];
+						} else {
+							return null;
+						}
+					});
+					response(filteredArray);
+				},
+			});
 		});
 
 		if (count >= (MAX_P - 1)) {
@@ -248,22 +263,38 @@ L.PopupEx = L.Popup.extend({
 			$(this._descPContainer).empty();
 			$(this._descNewPContainer).empty();
 
-			for (i = 0; i < marker._descPClasses.length; i++) {
+			for (i = 0; i < marker._descPIds.length; i++) {
 				var pContainer = L.DomUtil.create('div', 'popup-p-container', this._descPContainer);
 				var pMinusButton = L.DomUtil.create('span', 'popup-p-button ion-minus', pContainer);
 				L.DomEvent.on(pMinusButton, 'click', this._onPMinusClicked, this);
 				L.DomUtil.create('span', 'popup-p-label', pContainer).innerHTML = 'p:';
-				var pClass = L.DomUtil.create('select', 'popup-p-select', pContainer);
+				var pId = L.DomUtil.create('select', 'popup-p-select', pContainer);
 				var pText = L.DomUtil.create('input', 'popup-p-text', pContainer);
 				pText.size = 18;
 				var option;
 				collP.data.forEach(function(rec) {
-					option = new Option(rec.class, rec.class);
-					pClass.add(option);
+					option = new Option(rec['class'], rec['$loki']);
+					pId.add(option);
 				});
 
-				pClass.value = marker._descPClasses[i];
+				pId.value = marker._descPIds[i];
 				pText.value = marker._descPTexts[i];
+
+				$('.popup-p-text').on('focus', function(){
+					var findPId = parseInt($(this).prev()[0].value, 10);
+					$(this).autocomplete({
+						source: function(request, response) {
+							var filteredArray = $.map(collDescP.chain().find({'p-id': findPId}).data(), function(item) {
+								if (item['text'].toLowerCase().startsWith(request.term.toLowerCase())) {
+									return item['text'];
+								} else {
+									return null;
+								}
+							});
+							response(filteredArray);
+						},
+					});
+				});
 			}
 
 			if (i < MAX_P) {
@@ -295,8 +326,8 @@ L.PopupEx = L.Popup.extend({
 			}
 			descH1 = "<h1>" + descH1 + "</h1>";
 
-			for (i = 0; i < marker._descPClasses.length; i++) {
-				ps += "<p class='" + marker._descPClasses[i] + "'>" + marker._descPTexts[i] + "</p>";
+			for (i = 0; i < marker._descPIds.length; i++) {
+				ps += "<p class='" + collP.get(marker._descPIds[i])['class'] + "'>" + marker._descPTexts[i] + "</p>";
 			}
 
 			this._contentNode.innerHTML = descImg + descH2 + descH1 + ps;
@@ -457,9 +488,9 @@ L.MarkerEx = L.Marker.extend({
 		this._descImg = '';
 		this._descH2 = '';
 		this._descH1 = '';
-		this._descPClasses = [];
+		this._descPIds = [];
 		this._descPTexts = [];
-		var label;
+		this._label = '';
 		var group;
 
 		var lGroupId = this._groupId;
@@ -512,8 +543,8 @@ L.MarkerEx = L.Marker.extend({
 		for (i = 0; i < joinDescP.data().length; i++) {
 			if (Object.keys(joinDescP.data()[i].right).length) {
 				var descP = collDescP.get(joinDescP.data()[i].left['$loki']);
-				var p = collP.get(descP['p-id']);
-				this._descPClasses[idx] = p['class'];
+				// var p = collP.get(descP['p-id']);
+				this._descPIds[idx] = descP['p-id'];
 				this._descPTexts[idx] = descP['text'];
 				idx++;
 			}
@@ -527,12 +558,12 @@ L.MarkerEx = L.Marker.extend({
 		this.options.alt = 'level' + this._level + mainGroupName;
 		this.options.title = this._texts[1] + ': ' + this._texts[0];
 
-		label = this._texts[0];
-		if (label) {
+		this._label = this._texts[0];
+		if (this._label) {
 			if (this._quantity) {
-				label += ' (x' + this._quantity + ')';
+				this._label += ' (x' + this._quantity + ')';
 			}
-			this.bindLabel(label);
+			this.bindLabel(this._label);
 		}
 
 		this.bindPopup(new L.PopupEx());
